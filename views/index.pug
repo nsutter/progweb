@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  script(src='/javascripts/affichage.js')
+
+  a(href='/')
+    h1= title
+
+  if(!user)
+    a.button.btn.btn-success(href="javascript:visibilite('co');")
+      | Se connecter
+    | &nbsp;&nbsp;
+    a.button.btn.btn-info(href="/inscription")
+      | S'inscrire
+  if(user)
+    form.form-inline(class='logout', action='/logout', method='post')
+      a.lienGris(href="/profil")
+        p.form-control-static #{user.username}
+      | &nbsp;&nbsp;
+      input(type='hidden', name='url')
+      button.btn.btn-info(type='submit') Se déconnecter
+
+  #co.co-container-centered
+    .well
+      .pull-right
+        a.button.croix(href="javascript:visibilite('co');")
+          | X
+      br
+      br
+      form(class='login', action='/login', method='post')
+        input(type='text', name='username' class='form-control', placeholder="Nom d'utilisateur",required, autofocus)
+        br
+        input(type='password', name='password' class='form-control', placeholder="Mot de passe", required)
+        input(type='hidden', name='url')
+        br
+        button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter
