@@ -4,38 +4,30 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var oracledb = require('oracledb');
+var mysql      = require('mysql');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
-var dbConfig = require('./dbconfig.js');
-
-oracledb.getConnection(
-  {
-    user          : dbConfig.user,
-    password      : dbConfig.password,
-    connectString : dbConfig.connectString
-  },
-  function(err, connection)
-  {
-    if (err) {
-      console.error(err.message);
-      return;
-    }
-    console.log('Connection was successful!');
-
-    connection.release(
-      function(err)
-      {
-        if (err) {
-          console.error(err.message);
-          return;
-        }
-      });
+var connection = mysql.createConnection({
+  host     : 'fouinybaby.myqnapcloud.com',
+  port     : '4000',
+  user     : 'progweb',
+  password : 'a4QKPa15051O',
+  database : 'progweb'
 });
+
+connection.connect();
+
+connection.query('SELECT * FROM UTILISATEUR', function(err, rows, fields) {
+  if (err) throw err;
+
+  console.log('The solution is: ', rows);
+});
+
+connection.end();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
