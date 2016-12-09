@@ -4,11 +4,38 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var oracledb = require('oracledb');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var dbConfig = require('./dbconfig.js');
+
+oracledb.getConnection(
+  {
+    user          : dbConfig.user,
+    password      : dbConfig.password,
+    connectString : dbConfig.connectString
+  },
+  function(err, connection)
+  {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log('Connection was successful!');
+
+    connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
