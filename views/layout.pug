@@ -8,30 +8,33 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     nav.navbar.navbar-default
-        .container-fluid
-          .navbar-header
-            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#nc', aria-expanded='false')
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.navbar-brand(href='/') OPEN REFUGEES
-          #nc.collapse.navbar-collapse
-            ul.nav.navbar-nav.navbar-right
-              if(user)
-                li
-                  a(href="/asso") Access to your administration panel
-              if(!user)
-                li
-                  a(href="/login") Log in
-              if(user)
-                li
-                  a(href="/logout") Log out
-              if(!user)
-                li
-                  a(href="/register") Register
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#nc', aria-expanded='false')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') NOM DU SITE
+        #nc.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            if(!user)
               li
-                a(href="/about") About
+                a.button(href="javascript:visibilite('co');")
+                  | Se connecter
+              li
+                a.button(href="/inscription")
+                  | S'inscrire
+            if(user)
+              form.form-inline(class='logout', action='/logout', method='post')
+                li
+                  a(href="/profil")
+                    p.form-control-static #{user.username}
+                li
+                  input(type='hidden', name='url')
+                  button.btn.btn-info(type='submit') Se déconnecter
+            li
+              a(href="/about") About
 
     block content
 
