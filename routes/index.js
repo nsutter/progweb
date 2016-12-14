@@ -84,4 +84,13 @@ router.get('/categorie/:idCategorie', function(req, res, next) {
   video.getByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
 });
 
+
+router.get('/nouveaute', function(req, res, next) {
+  // TO-DO
+});
+
+router.get('/favori', function(req, res, next) {
+  // TO-DO
+});
+
 module.exports = router;

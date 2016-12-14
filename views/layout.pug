@@ -27,8 +27,17 @@ html
                   | S'inscrire
             if(user)
               li
+                a.button(href="/nouveaute")
+                  | Mes nouveautés&nbsp;
+                  span.glyphicon.glyphicon-flash(aria-hidden="true")
+              li
+                a.button(href="/favori")
+                  | Mes favoris&nbsp;
+                  span.glyphicon.glyphicon-heart(aria-hidden="true")
+              li
                 a.button(href="/profil")
-                  | Mon profil
+                  | Mon profil&nbsp;
+                  span.glyphicon.glyphicon-cog(aria-hidden="true")
               li
                 a.button(href="/deconnexion")
                   | Se déconnecter

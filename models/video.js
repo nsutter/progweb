@@ -24,24 +24,38 @@ function extractionDesCategories(rows)
 
 module.exports =
 {
-  // récupère toutes les vidéos et appelle ensuite la fonction de callback avec le résultat
+  // récupère toutes les vidéos
   getAll: function(callback)
   {
     connection.query("SELECT * FROM VIDEO", function(err, rows){
       callback(err, rows, extractionDesCategories(rows));
     });
   },
-  // récupère les vidéos de la catégorie category et appelle ensuite la fonction de callback avec le résultat
+  // récupère les vidéos de la catégorie category
   getByCategory: function(callback, category)
   {
     connection.query("SELECT * FROM VIDEO WHERE Categorie = ?", [category], function(err, rows){
       callback(err, rows);
     });
   },
-  // récupère la vidéo d'identifiant id et appelle ensuite la fonction de callback avec le résultat
+  // récupère la vidéo d'identifiant id
   getOneById(callback, id)
   {
     connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows){
+      callback(err, rows);
+    });
+  },
+  // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
+  getNouveautes: function(callback, login)
+  {  // TO-DO : ajouté depuis - 2 semaines
+    connection.query("SELECT * FROM ABONEMENT a, VIDEO v, DIFFUSION d WHERE a.Login = ? AND a.NomEmission = v.NomEmission AND v.IdVideo = d.IdVideo", [login], function(err, rows){
+      callback(err, rows);
+    });
+  },
+  // récupère les vidéos favoris de l'utilisateur
+  getFavoris: function(callback, login)
+  {
+    connection.query("SELECT * FROM FAVORIS f, VIDEO v WHERE f.Login = ? AND f.IdVideo = v.IdVideo", [login], function(err, rows){
       callback(err, rows);
     });
   }
