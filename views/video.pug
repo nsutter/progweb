@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  script(src='/javascripts/socket.js')
+  .container
+    .row
+      .center
+        h1= video.NomEmission
+        iframe(src='https://www.youtube.com/embed/'+video.IdVideo, frameborder='0', allowfullscreen='')
+        a.btn.btn-primary.favoris(role='button')
+          | Mettre en favoris
+        | Episode #{video.NumEpisode}
+        | Categorie #{video.Categorie}
+        br
+        h2
+          | Description
+        | #{video.Description}
