@@ -21,11 +21,11 @@ block content
     .row
       .col-md-2
           h2 Liste des catégories
-          ul.listeDesCategories
+          ul
           - var lgc = categories.length;
           - var ic = 0;
             while ic < lgc
-              li
+              li.listeDesCategories
                 a.liensDesCategories(href='#{categories[ic]}') #{categories[ic]}
               - ic = ic + 1
       .col-md-10

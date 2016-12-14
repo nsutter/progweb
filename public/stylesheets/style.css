@@ -33,6 +33,10 @@ h1, h1:hover, h1:visited {
    list-style-type: none;
 }
 
+.liensDesCategories {
+  color: black;
+}
+
 /* Style des switchs - http://www.w3schools.com/howto/howto_css_switch.asp */
 .switch {
   position: relative;
