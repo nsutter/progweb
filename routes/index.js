@@ -2,10 +2,17 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
+var video = require('../models/video');
+
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
   // si on est connecté, on peut afficher l'utilisateur courant avec req.user
-  res.render('index', { title: 'Accueil' });
+  function aff(err, result) {
+    res.render('index', { title: 'Accueil', video:result});
+  }
+
+  video.getAll(aff);
+
 });
 
 /* GET page d'inscription */

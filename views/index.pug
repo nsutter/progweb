@@ -21,3 +21,20 @@ block content
           input(type='password', name='Mdp' class='form-control', placeholder="Mot de passe", required)
           br
           button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter
+
+  -var lg = video.length;
+  -var i = 0;
+    if lg >= 1
+      while i < lg
+        .container
+          .row
+            .col-md-4
+            .col-md-4
+              iframe(src="https://www.youtube.com/embed/"+video[i].IdVideo, frameborder='0', allowfullscreen='')
+              h2
+                | #{video[i].NomEmission}
+              h3
+                | #{video[i].Description}
+              | Categorie: #{video[i].Categorie}
+        br
+        - i= i +1
