@@ -3,4 +3,34 @@ extends layout
 block content
 
   a(href='/')
-    h1= title
+    .center
+      h1= title
+
+  .container
+    .row
+      .col-md-4
+      .col-md-4
+        .well
+          .center
+            | Nom: #{user.Nom}
+            br
+            br
+            | Prenom: #{user.Prenom}
+            br
+            br
+            | Login: #{user.Login}
+            br
+            br
+            | Email: #{user.Email}
+            br
+            br
+            | Date naissance: #{user.DateNaissance}
+            br
+            br
+            | Nationalité: #{user.Nationnalite}
+            br
+            br
+            if user.Newsletter == "T"
+              | Newsletter: Oui
+            else
+              | Newsletter: Non
