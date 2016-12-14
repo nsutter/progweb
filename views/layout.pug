@@ -26,15 +26,11 @@ html
                 a.button(href="/inscription")
                   | S'inscrire
             if(user)
-              form.form-inline(class='logout', action='/logout', method='post')
-                li
-                  a(href="/profil")
-                    p.form-control-static #{user.username}
-                li
-                  input(type='hidden', name='url')
-                  button.btn.btn-info(type='submit') Se déconnecter
-            li
-              a(href="/about") About
+              li
+                a(href="/profil")
+                  p.form-control-static #{user.username}
+                a.button(href="/deconnexion")
+                  | Se déconnecter
 
     block content
 

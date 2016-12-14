@@ -1,4 +1,3 @@
-
 function visibilite(aff)
 {
   if($("#" + aff).css("display") == "none")

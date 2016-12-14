@@ -6,7 +6,6 @@ block content
   a(href='/')
     h1= title
 
-
   #co.co-container-centered
     .col-md-5
     .col-md-2
@@ -16,10 +15,9 @@ block content
             | X
         br
         br
-        form(class='login', action='/login', method='post')
+        form(class='login', action='/connexion', method='post')
           input(type='text', name='Login' class='form-control', placeholder="Nom d'utilisateur",required, autofocus)
           br
           input(type='password', name='Mdp' class='form-control', placeholder="Mot de passe", required)
-          input(type='hidden', name='url')
           br
           button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter

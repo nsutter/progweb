@@ -6,39 +6,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
-
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
 var passport = require('passport');
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // on récupère la configuration de Passport
 
-var connection = mysql.createConnection({
-  host     : 'fouinybaby.myqnapcloud.com',
-  port     : '4000',
-  user     : 'progweb',
-  password : 'a4QKPa15051O',
-  database : 'progweb'
-});
-
-connection.connect();
-
-connection.query('SELECT * FROM UTILISATEUR', function(err, rows, fields) {
-  if (err) throw err;
-
-  console.log('The solution is: ', rows);
-});
-
-connection.end();
-
-// view engine setup
+// configuration du gestionnaire de vue, "pug")
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// les middleswares qui s'enchaînent
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
