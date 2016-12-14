@@ -2,6 +2,17 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
+// middleware
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/');
+}
+
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
   // si on est connecté, on peut afficher l'utilisateur courant avec req.user
@@ -31,6 +42,11 @@ router.post('/connexion', passport.authenticate('local-login'), function(req, re
 router.get('/deconnexion', function(req, res) {
     req.logout();
     res.redirect('/');
+});
+
+/* GET page d'affichage du profil d'un utilisateur */
+router.get('/profil', function(req, res, next) {
+  res.render('profil', {title: 'Profil de ' + req.user.Prenom + ' ' + req.user.Nom, user : req.user});
 });
 
 module.exports = router;

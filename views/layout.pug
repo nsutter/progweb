@@ -27,10 +27,12 @@ html
                   | S'inscrire
             if(user)
               li
-                a(href="/profil")
-                  p.form-control-static #{user.username}
+                a.button(href="/utilisateur")
+                  | Mon profil
+              li
                 a.button(href="/deconnexion")
                   | Se déconnecter
+
 
     block content
 
