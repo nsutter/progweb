@@ -16,6 +16,9 @@ function isLoggedIn(req, res, next) {
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
   function aff(err, result, categories) {
+    if(err)
+      res.redirect('/404');
+
     res.render('index', {title : 'Accueil', video : result, user : req.user, categories : categories});
   }
 
@@ -63,7 +66,6 @@ router.get('/video/:idVideo', function(req, res, next) {
     if(err)
       res.redirect('/');
 
-    console.log(result);
     res.render('categorie', {title : 'Vidéo : ' + result.NomEmission,  video : result, user : req.user});
   }
 
