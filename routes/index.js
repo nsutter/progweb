@@ -16,6 +16,9 @@ function isLoggedIn(req, res, next) {
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
   function aff(err, result, categories) {
+    if(err)
+      res.redirect('/404');
+
     res.render('index', {title : 'Accueil', video : result, user : req.user, categories : categories});
   }
 
