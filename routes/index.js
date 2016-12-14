@@ -57,14 +57,26 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
   res.render('profil', {title : 'Profil de ' + req.user.Prenom + ' ' + req.user.Nom, user : req.user});
 });
 
+/* GET page d'affichage d'une vidéo */
+router.get('/video/:idVideo', function(req, res, next) {
+  function aff(err, result) {
+    if(err)
+      res.redirect('/');
+
+    console.log(result);
+    res.render('categorie', {title : 'Vidéo : ' + result.NomEmission,  video : result, user : req.user});
+  }
+
+  video.getOneById(aff, req.params.idVideo);
+});
+
 /* GET page d'affichage des vidéos d'une catégorie */
 router.get('/categorie/:idCategorie', function(req, res, next) {
   function aff(err, result) {
     if(err)
       res.redirect('/');
 
-    console.log(result);
-    res.render('categorie', {title : 'Toutes les vidéos de la catégorie' + req.params.idCategorie,  video : result, user : req.user});
+    res.render('categorie', {title : 'Toutes les vidéos de la catégorie : ' + req.params.idCategorie,  video : result, user : req.user});
   }
 
   video.getByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"

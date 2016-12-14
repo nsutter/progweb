@@ -24,16 +24,24 @@ function extractionDesCategories(rows)
 
 module.exports =
 {
+  // récupère toutes les vidéos et appelle ensuite la fonction de callback avec le résultat
   getAll: function(callback)
   {
     connection.query("SELECT * FROM VIDEO", function(err, rows){
       callback(err, rows, extractionDesCategories(rows));
     });
   },
-
+  // récupère les vidéos de la catégorie category et appelle ensuite la fonction de callback avec le résultat
   getByCategory: function(callback, category)
   {
     connection.query("SELECT * FROM VIDEO WHERE Categorie = ?", [category], function(err, rows){
+      callback(err, rows);
+    });
+  },
+  // récupère la vidéo d'identifiant id et appelle ensuite la fonction de callback avec le résultat
+  getOneById(callback, id)
+  {
+    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows){
       callback(err, rows);
     });
   }
