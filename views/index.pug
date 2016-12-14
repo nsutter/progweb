@@ -3,9 +3,6 @@ extends layout
 block content
   script(src='/javascripts/affichage.js')
 
-  a(href='/')
-    h1= title
-
   #co.co-container-centered
     .well
       .pull-right
@@ -20,14 +17,22 @@ block content
         br
         button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter
 
-  -var lg = video.length;
-  -var i = 0;
-    if lg >= 1
-      while i < lg
-        .container
-          .row
-            .col-md-4
-            .col-md-4
+  .container
+    .row
+      .col-md-2
+          h2 Liste des catégories
+          ul.listeDesCategories
+          - var lgc = categories.length;
+          - var ic = 0;
+            while ic < lgc
+              li
+                a.liensDesCategories(href='#{categories[ic]}') #{categories[ic]}
+              - ic = ic + 1
+      .col-md-10
+        - var lg = video.length;
+        - var i = 0;
+          if lg >= 1
+            while i < lg
               iframe(align='middle', src="https://www.youtube.com/embed/"+video[i].IdVideo, frameborder='0', allowfullscreen='')
               h2
                 | #{video[i].NomEmission}
@@ -35,5 +40,5 @@ block content
                 | #{video[i].Description}
               br
               | Categorie: #{video[i].Categorie}
-        br
-        - i= i +1
+              br
+              - i = i + 1

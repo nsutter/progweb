@@ -15,8 +15,8 @@ function isLoggedIn(req, res, next) {
 
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
-  function aff(err, result) {
-    res.render('index', { title: 'Accueil', video : result, user : req.user});
+  function aff(err, result, categories) {
+    res.render('index', {title : 'Accueil', video : result, user : req.user, categories : categories});
   }
 
   video.getAll(aff);
@@ -54,7 +54,7 @@ router.get('/deconnexion', isLoggedIn, function(req, res) {
 
 /* GET page d'affichage du profil d'un utilisateur */
 router.get('/profil', isLoggedIn, function(req, res, next) {
-  res.render('profil', {title: 'Profil de ' + req.user.Prenom + ' ' + req.user.Nom, user : req.user});
+  res.render('profil', {title : 'Profil de ' + req.user.Prenom + ' ' + req.user.Nom, user : req.user});
 });
 
 module.exports = router;

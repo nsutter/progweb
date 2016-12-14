@@ -29,6 +29,9 @@ h1, h1:hover, h1:visited {
   text-decoration: none;
 }
 
+.listeDesCategories {
+   list-style-type: none;
+}
 
 /* Style des switchs - http://www.w3schools.com/howto/howto_css_switch.asp */
 .switch {
