@@ -20,14 +20,16 @@ block content
   .container
     .row
       .col-md-2
-          h2 Liste des catégories
-          ul
           - var lgc = categories.length;
           - var ic = 0;
+          h2 Liste des catégories
+          ul.nav.nav-pills.nav-stacked
+            li.active(role='presentation')
+              a(href='/') Toutes
             while ic < lgc
-              li.listeDesCategories
-                a.liensDesCategories(href='#{categories[ic]}') #{categories[ic]}
-              - ic = ic + 1
+              li(role='presentation')
+                a(href='/categorie/'+categories[ic]) #{categories[ic]}
+              - ic = ic + 1;
       .col-md-10
         - var lg = video.length;
         - var i = 0;

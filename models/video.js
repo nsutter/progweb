@@ -29,5 +29,12 @@ module.exports =
     connection.query("SELECT * FROM VIDEO", function(err, rows){
       callback(err, rows, extractionDesCategories(rows));
     });
+  },
+
+  getByCategory: function(callback, category)
+  {
+    connection.query("SELECT * FROM VIDEO WHERE Categorie = ?", [category], function(err, rows){
+      callback(err, rows);
+    });
   }
 }
