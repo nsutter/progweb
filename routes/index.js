@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var video = require('../models/video');
 
 // middleware
 function isLoggedIn(req, res, next) {
@@ -15,8 +16,16 @@ function isLoggedIn(req, res, next) {
 
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
-  // si on est connecté, on peut afficher l'utilisateur courant avec req.user
-  res.render('index', {title: 'Accueil', user : req.user});
+  function aff(err, result) {
+    res.render('index', { title: 'Accueil', video : result, user : req.user});
+  }
+
+  video.getAll(aff);
+});
+
+/* GET page d'inscription */
+router.get('/inscription', function(req, res) {
+    res.render('inscription');
 });
 
 /* POST formulaire d'inscription - appel de la stratégie 'local-signup' pour l'inscription
