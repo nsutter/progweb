@@ -11,6 +11,11 @@ var users = require('./routes/users');
 
 var app = express();
 
+var passport = require('passport');
+require('./config/passport')(passport); // pass passport for configuration
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 var connection = mysql.createConnection({
   host     : 'fouinybaby.myqnapcloud.com',
   port     : '4000',
@@ -41,8 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+require('./routes/index.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
