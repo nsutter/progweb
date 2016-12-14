@@ -5,12 +5,7 @@ var router = express.Router();
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
   // si on est connecté, on peut afficher l'utilisateur courant avec req.user
-  res.render('index', { title: 'Accueil' });
-});
-
-/* GET page d'inscription */
-router.get('/inscription', function(req, res) {
-    res.render('inscription');
+  res.render('index', {title: 'Accueil', user : req.user});
 });
 
 /* POST formulaire d'inscription - appel de la stratégie 'local-signup' pour l'inscription
@@ -22,7 +17,7 @@ router.post('/inscription', passport.authenticate('local-signup', {
 }));
 
 router.get('/connexion', function(req, res) {
-    res.render('connexion');
+    res.render('connexion', {user : req.user});
 });
 
 /* POST formulaire de connexion - appel de la stratégie 'local-login' pour l'inscription
