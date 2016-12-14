@@ -30,18 +30,22 @@ block content
                 a(href='/categorie/'+categories[ic]) #{categories[ic]}
               - ic = ic + 1;
       .col-md-10
-        - var lg = video.length;
-        - var i = 0;
-          if lg >= 1
-            while i < lg
-              a(href="/video/"+video[i].IdVideo)
-                .center
-                  img#img_accueil(src="http://img.youtube.com/vi/"+video[i].IdVideo+"/0.jpg")
-                  h2
-                    | #{video[i].NomEmission}
-                  h3
-                    | #{video[i].Description}
-                  br
-                  | Categorie: #{video[i].Categorie}
-                  br
+        .container
+          - var lg = video.length;
+          - var i = 0;
+            if lg >= 1
+              .row
+                while i < lg
+                  .col-md-4.col-sm-12
+                    a(href="/video/"+video[i].IdVideo)
+                      .center
+                        img#img_accueil(src="http://img.youtube.com/vi/"+video[i].IdVideo+"/0.jpg")
+                        h2
+                          | #{video[i].NomEmission}
+                        h3
+                          | #{video[i].Description}
+                        br
+                        | Categorie: #{video[i].Categorie}
+                        br
+                        br
                   - i = i + 1

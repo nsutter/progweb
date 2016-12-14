@@ -6,8 +6,6 @@ var server = require('http').createServer(router),
 		io = require('socket.io').listen(server),
 		fs = require('fs');
 
-var site = require('../models/site');
-
 module.exports = function(passport){
 
 	io.sockets.on('connection', function (socket) {

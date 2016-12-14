@@ -34,6 +34,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+var socket = require('./routes/socket')(passport);
+app.use('/', socket);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
