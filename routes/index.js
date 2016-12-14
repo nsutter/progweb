@@ -66,7 +66,6 @@ router.get('/video/:idVideo', function(req, res, next) {
     if(err)
       res.redirect('/');
 
-    console.log(result);
     res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user});
   }
 

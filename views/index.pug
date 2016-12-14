@@ -29,14 +29,15 @@ block content
               li(role='presentation')
                 a(href='/categorie/'+categories[ic]) #{categories[ic]}
               - ic = ic + 1;
+      br
       .col-md-10
-        .container
-          - var lg = video.length;
-          - var i = 0;
-            if lg >= 1
-              .row
-                while i < lg
-                  .col-md-4.col-sm-12
+        - var lg = video.length;
+        - var i = 0;
+          if lg >= 1
+            .row
+              while i < lg
+                .col-lg-4.col-md-6.col-sm-12
+                  .well
                     a(href="/video/"+video[i].IdVideo)
                       .center
                         img#img_accueil(src="http://img.youtube.com/vi/"+video[i].IdVideo+"/0.jpg")
@@ -46,6 +47,6 @@ block content
                           | #{video[i].Description}
                         br
                         | Categorie: #{video[i].Categorie}
-                        br
-                        br
-                  - i = i + 1
+                      br
+                      br
+                - i = i + 1

@@ -12,6 +12,7 @@ module.exports = function(passport){
 
     socket.on('favoris', function(id) {
       //ajouter en favoris
+			// var userId = socket.request.session.passport.user;
       socket.emit('rm');
     });
 
