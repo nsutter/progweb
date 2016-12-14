@@ -3,16 +3,22 @@ extends layout
 block content
 
   script(src='/javascripts/socket.js')
+
   .container
     .row
-      .center
-        h1= video.NomEmission
-        iframe(src='https://www.youtube.com/embed/'+video.IdVideo, frameborder='0', allowfullscreen='')
+      .col-md-2
+      .col-md-8
+        .center
+          h1= title
+          .embed-container
+            iframe(src='https://www.youtube.com/embed/'+video[0].IdVideo, allowfullscreen='')
+        br
+        br
         a.btn.btn-primary.favoris(role='button')
           | Mettre en favoris
-        | Episode #{video.NumEpisode}
-        | Categorie #{video.Categorie}
+        | &nbsp; &nbsp;&nbsp; Episode #{video[0].NumEpisode}
+        | Categorie #{video[0].Categorie}
         br
         h2
           | Description
-        | #{video.Description}
+        | #{video[0].Description}
