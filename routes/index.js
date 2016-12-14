@@ -3,14 +3,13 @@ var passport = require('passport');
 var router = express.Router();
 var video = require('../models/video');
 
-// middleware
+// middleware de vérification de l'authentification
 function isLoggedIn(req, res, next) {
-
-	// if user is authenticated in the session, carry on
-	if (req.isAuthenticated())
+  // l'utilisateur est connecté, on continue
+	if(req.isAuthenticated())
 		return next();
 
-	// if they aren't redirect them to the home page
+	// sinon on redirige vers l'accueil
 	res.redirect('/');
 }
 
@@ -48,13 +47,13 @@ router.post('/connexion', passport.authenticate('local-login'), function(req, re
 });
 
 /* GET déconnexion */
-router.get('/deconnexion', function(req, res) {
+router.get('/deconnexion', isLoggedIn, function(req, res) {
     req.logout();
     res.redirect('/');
 });
 
 /* GET page d'affichage du profil d'un utilisateur */
-router.get('/profil', function(req, res, next) {
+router.get('/profil', isLoggedIn, function(req, res, next) {
   res.render('profil', {title: 'Profil de ' + req.user.Prenom + ' ' + req.user.Nom, user : req.user});
 });
 
