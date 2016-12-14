@@ -7,20 +7,18 @@ block content
     h1= title
 
   #co.co-container-centered
-    .col-md-5
-    .col-md-2
-      .well
-        .pull-right
-          a.button.croix(href="javascript:visibilite('co');")
-            | X
+    .well
+      .pull-right
+        a.button.croix(href="javascript:visibilite('co');")
+          | X
+      br
+      br
+      form(class='login', action='/connexion', method='post')
+        input(type='text', name='Login' class='form-control', placeholder="Nom d'utilisateur",required, autofocus)
         br
+        input(type='password', name='Mdp' class='form-control', placeholder="Mot de passe", required)
         br
-        form(class='login', action='/connexion', method='post')
-          input(type='text', name='Login' class='form-control', placeholder="Nom d'utilisateur",required, autofocus)
-          br
-          input(type='password', name='Mdp' class='form-control', placeholder="Mot de passe", required)
-          br
-          button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter
+        button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter
 
   -var lg = video.length;
   -var i = 0;
@@ -30,11 +28,12 @@ block content
           .row
             .col-md-4
             .col-md-4
-              iframe(src="https://www.youtube.com/embed/"+video[i].IdVideo, frameborder='0', allowfullscreen='')
+              iframe(align='middle', src="https://www.youtube.com/embed/"+video[i].IdVideo, frameborder='0', allowfullscreen='')
               h2
                 | #{video[i].NomEmission}
               h3
                 | #{video[i].Description}
+              br
               | Categorie: #{video[i].Categorie}
         br
         - i= i +1

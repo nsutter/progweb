@@ -7,8 +7,21 @@ a {
   color: #00B7FF;
 }
 
+iframe {
+  margin: 0 auto;
+}
+
 #co {
   display: none;
+  position: fixed;
+  z-index: 1000;
+}
+
+.co-container-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 h1, h1:hover, h1:visited {
