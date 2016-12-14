@@ -38,17 +38,33 @@ module.exports = function(passport) {
             return done(null, false);
         } else { // l'utilisateur n'existe pas
 
-            // on crée un nouvel utilisateur
-          var nouveUtilisateur = {
+          if(req.body.Newsletter)
+          {
+            var newsletter = 'T';
+          }
+          else
+          {
+            var newsletter = 'F';
+          }
+
+          // on crée un nouvel utilisateur
+          var nouvelUtilisateur = {
             Login: username,
-            Mdp: bcrypt.hashSync(password, null, null)  // mot de passe en paramètre haché
+            Mdp: bcrypt.hashSync(password, null, null),  // mot de passe en paramètre haché
+            Nom: req.body.Nom,
+            Prenom: req.body.Prenom,
+            DateNaissance: req.body.DateNaissance,
+            Email: req.body.Email,
+            Newsletter: newsletter,
+            Admin: 'F',
+            Nationnalite: req.body.Nationnalite
           };
 
           // préparation de la requête et insertion de l'utilisateur
-          var insertQuery = "INSERT INTO UTILISATEUR (Login, Mdp) values (?,?)";
+          var insertQuery = "INSERT INTO UTILISATEUR (Nom, Prenom, Login, Mdp, DateNaissance, Email, Newsletter, Admin, Nationnalite) values (?,?,?,?,?,?,?,?,?)";
 
-          connection.query(insertQuery, [nouveUtilisateur.Login, nouveUtilisateur.Mdp], function(err, rows) {
-            return done(null, nouveUtilisateur);
+          connection.query(insertQuery, [nouvelUtilisateur.Nom, nouvelUtilisateur.Prenom, nouvelUtilisateur.Login, nouvelUtilisateur.Mdp, nouvelUtilisateur.DateNaissance, nouvelUtilisateur.Email, nouvelUtilisateur.Newsletter, nouvelUtilisateur.Admin, nouvelUtilisateur.Nationnalite], function(err, rows) {
+            return done(null, nouvelUtilisateur);
           });
         }
       });

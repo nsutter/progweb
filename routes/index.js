@@ -6,13 +6,11 @@ var video = require('../models/video');
 
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
-  // si on est connecté, on peut afficher l'utilisateur courant avec req.user
   function aff(err, result) {
-    res.render('index', { title: 'Accueil', video:result});
+    res.render('index', { title: 'Accueil', video : result, user : req.user});
   }
 
   video.getAll(aff);
-
 });
 
 /* GET page d'inscription */
@@ -29,7 +27,7 @@ router.post('/inscription', passport.authenticate('local-signup', {
 }));
 
 router.get('/connexion', function(req, res) {
-    res.render('connexion');
+    res.render('connexion', {user : req.user});
 });
 
 /* POST formulaire de connexion - appel de la stratégie 'local-login' pour l'inscription

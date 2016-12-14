@@ -2,14 +2,29 @@ extends layout
 
 block content
   .container
-    h1 Register Page
-    p.lead Say something worthwhile here.
+    h1 Inscription
     br
     form(role='form', action="/inscription",method="post", style='max-width: 300px;')
       .form-group
-        input.form-control(type='text', name="Login", placeholder='Enter Username')
+        input.form-control(type='text', name="Login", placeholder='Identifiant')
       .form-group
-        input.form-control(type='password', name="Mdp", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
+        input.form-control(type='password', name="Mdp", placeholder='Mot de passe')
+      .form-group
+        input.form-control(type='text', name="Email", placeholder='Mail')
+      .form-group
+        input.form-control(type='text', name="Nom", placeholder='Nom')
+      .form-group
+        input.form-control(type='text', name="Prenom", placeholder='Prénom')
+      .form-group
+        input.form-control(type='date', name="DateNaissance", placeholder='Date de naissance - (YYYY-MM-DD)')
+      .form-group
+        input.form-control(type='text', name="Nationnalite", placeholder='Pays')
+      .form-group
+        p.form-control-static Voulez-vous inscrire à notre superbe newsletter ?
+        label.switch
+          input(type='checkbox', name="Newsletter")
+          .slider.round
       a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+        button.btn.btn-default(type='button') Revenir à l'accueil
+      | &nbsp;
+      button.btn.btn-success(type='submit') S'inscrire
