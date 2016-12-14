@@ -31,7 +31,7 @@ module.exports = function(passport) {
     },
     function(req, username, password, done) {
       // on vérifie si l'utilisateur existe déjà
-      connection.query("SELECT * FROM UTILISATEUR WHERE Login = ?",[username], function(err, rows) {
+      connection.query("SELECT * FROM UTILISATEUR WHERE Login = ?", [username], function(err, rows) {
         if (err) // échec de la requête
             return done(err);
         if (rows.length) { // l'utilisateur existe déjà

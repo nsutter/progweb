@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     res.render('index', {title : 'Accueil', video : result, user : req.user, categories : categories});
   }
 
-  video.getAll(aff);
+  video.getAll(aff); // on récupère les vidéos - partie "modèle"
 });
 
 /* GET page d'inscription */
@@ -59,7 +59,15 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
 
 /* GET page d'affichage des vidéos d'une catégorie */
 router.get('/categorie/:idCategorie', function(req, res, next) {
-  res.render('categorie', {title : 'Toutes les vidéos de la catégorie' + idCategorie, user : req.user});
+  function aff(err, result) {
+    if(err)
+      res.redirect('/');
+
+    console.log(result);
+    res.render('categorie', {title : 'Toutes les vidéos de la catégorie' + req.params.idCategorie,  video : result, user : req.user});
+  }
+
+  video.getByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
 });
 
 module.exports = router;
