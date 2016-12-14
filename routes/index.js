@@ -66,7 +66,8 @@ router.get('/video/:idVideo', function(req, res, next) {
     if(err)
       res.redirect('/');
 
-    res.render('categorie', {title : 'Vidéo : ' + result.NomEmission,  video : result, user : req.user});
+    console.log(result);
+    res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user});
   }
 
   video.getOneById(aff, req.params.idVideo);
