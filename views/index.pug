@@ -36,6 +36,8 @@ block content
           if lg >= 1
             .row
               while i < lg
+                if i%3 == 0
+                  .row
                 .col-lg-4.col-md-6.col-sm-12
                   .well
                     a(href="/video/"+video[i].IdVideo)
