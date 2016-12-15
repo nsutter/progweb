@@ -34,6 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+
 var socket = require('./routes/socket')(passport);
 app.use('/', socket);
 
