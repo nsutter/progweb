@@ -2,20 +2,6 @@ extends layout
 
 block content
 
-  #co.co-container-centered
-    .well
-      .pull-right
-        a.button.croix(href="javascript:visibilite('co');")
-          | X
-      br
-      br
-      form(class='login', action='/connexion', method='post')
-        input(type='text', name='Login' class='form-control', placeholder="Nom d'utilisateur",required, autofocus)
-        br
-        input(type='password', name='Mdp' class='form-control', placeholder="Mot de passe", required)
-        br
-        button.btn.btn-lg.btn-success.btn-block(type='submit') Se connecter
-
   .container
     .row
       .col-md-2

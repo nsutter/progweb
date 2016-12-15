@@ -10,7 +10,8 @@ module.exports = function(passport){
 
 	io.sockets.on('connection', function (socket) {
 
-    socket.on('favoris', function(id) {
+    socket.on('favoris', function(vid, Mdp, log) {
+			// console.log(data.vid);
       //ajouter en favoris
 			// var userId = socket.request.session.passport.user;
       socket.emit('rm');
