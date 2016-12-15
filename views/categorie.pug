@@ -25,6 +25,8 @@ block content
             .row
               h2 Toutes les vidéos de la catégorie : #{video[0].Categorie}
               while i < lg
+                if i%3 == 0
+                  .row
                 .col-lg-4.col-md-6.col-sm-12
                   .well
                     a(href="/video/"+video[i].IdVideo)
