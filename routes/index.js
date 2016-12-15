@@ -65,16 +65,7 @@ router.get('/video/:idVideo', function(req, res, next) {
 	if(req.user)
 	{
 		function aff(err, result, estFavori, estAbonne) {
-			var a, f;
-			if(estFavori)
-				f=1;
-			else
-				f=0;
-			if(estAbonne)
-				a=1;
-			else
-				a=0;
-			res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : f, estAbonne : a});
+			res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : estFavori, estAbonne : estAbonne});
 		}
 		video.getOneById(aff, req.user.Login, req.params.idVideo);
 	}

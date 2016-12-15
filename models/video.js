@@ -45,11 +45,11 @@ module.exports =
   // récupère la vidéo d'identifiant id
   getOneById(callback, usr, id)
   {
-    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows, id){
+    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows){
       var video= rows;
-      connection.query("SELECT * FROM FAVORIS WHERE IdVideo = ? AND Login = ?", [id, usr], function(err, rows, videos, id, usr){
+      connection.query("SELECT * FROM FAVORIS WHERE IdVideo = ? AND Login = ?", [id, usr], function(err, rows, videos){
         var favori= rows;
-        connection.query("SELECT * FROM VIDEO v, ABONEMENT f WHERE v.NomEmission = f.NomEmission AND f.Login = ? AND v.IdVideo = ?", [usr, id], function(err, rows, videos, favori, id, usr){
+        connection.query("SELECT * FROM VIDEO v, ABONEMENT f WHERE v.NomEmission = f.NomEmission AND f.Login = ? AND v.IdVideo = ?", [usr, id], function(err, rows){
           callback(err, video, favori, rows); // vidéo résultat, favori, abonnement
         })
       });
@@ -84,7 +84,7 @@ module.exports =
   // insère un favori pour l'utilisateur Login
   setFavori: function(Login, Mdp, IdVideo)
   {
-    connection.query("SELECT * FROM UTILISATEUR u WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows, Login, IdVideo){
+    connection.query("SELECT * FROM UTILISATEUR WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows){
       if(rows.length == 1)
       {
         connection.query("INSERT INTO FAVORIS VALUES (?,?)", [Login, IdVideo], function(err, rows){})
@@ -95,11 +95,13 @@ module.exports =
   // insère un abonnement pour l'utilisateur Login
   setAbonnement: function(Login, Mdp, NomEmission)
   {
-    connection.query("SELECT * FROM UTILISATEUR u WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows, Login, NomEmission){
+    console.log(Login);
+    connection.query("SELECT * FROM UTILISATEUR WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows){
       if(rows.length == 1)
       {
         connection.query("INSERT INTO ABONEMENT VALUES (?,?)", [Login, NomEmission], function(err, rows){})
       }
     });
-  }
+  },
+
 }

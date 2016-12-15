@@ -13,12 +13,13 @@ block content
         br
         br
         if user
-          if estFavori == 0
+          if estFavori.length == 0
             a.btn.btn-primary.favoris(role='button')
               | Mettre en favoris&nbsp;
-          if estAbonnee == 0
+          | &nbsp;
+          if estAbonne.length == 0
             a.btn.btn-danger.abonnee(role='button')
-              | S'abonnee&nbsp;
+              | S'abonner&nbsp;
         | &nbsp;Episode #{video[0].NumEpisode}
         | Categorie #{video[0].Categorie}
         br
@@ -44,5 +45,5 @@ block content
         socket.emit('favoris', '#{video[0].IdVideo}', '#{user.Mdp}', '#{user.Login}');
       });
       $('.abonnee').click(function() {
-        socket.emit('abonnee', '#{video[0].IdVideo}', '#{user.Mdp}', '#{user.Login}');
+        socket.emit('abonnee', '#{video[0].NomEmission}', '#{user.Mdp}', '#{user.Login}');
       });

@@ -1,4 +1,5 @@
 var express = require('express');
+var video = require('../models/video');
 
 var router = express.Router();
 
@@ -11,15 +12,11 @@ module.exports = function(passport){
 	io.sockets.on('connection', function (socket) {
 
     socket.on('favoris', function(vid, Mdp, log) {
-			// console.log(data.vid);
-      //ajouter en favoris
-			// var userId = socket.request.session.passport.user;
+			video.setFavori(log, Mdp, vid);
       socket.emit('rm-fav');
     });
 		socket.on('abonnee', function(vid, Mdp, log) {
-			// console.log(data.vid);
-      //ajouter en favoris
-			// var userId = socket.request.session.passport.user;
+			video.setAbonnement(log, Mdp, vid);
       socket.emit('rm-abo');
     });
 
