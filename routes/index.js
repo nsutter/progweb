@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     res.render('index', {title : 'Accueil', video : result, user : req.user, categories : categories});
   }
 
-  video.getAll(aff); // on récupère les vidéos - partie "modèle"
+  video.getAllVideos(aff); // on récupère les vidéos - partie "modèle"
 });
 
 /* GET page d'inscription */
@@ -81,12 +81,18 @@ router.get('/categorie/:idCategorie', function(req, res, next) {
     res.render('categorie', {title : 'Toutes les vidéos de la catégorie : ' + req.params.idCategorie,  video : result, user : req.user});
   }
 
-  video.getByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
+  video.getAllVideosByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
 });
 
-
 router.get('/nouveaute', function(req, res, next) {
-  // TO-DO
+	function aff(err, result) {
+		if(err)
+			res.redirect('/');
+
+		res.render('nouveaute', {title : 'Toutes les dernières vidéos des émissions que vous suivez',  video : result, user : req.user});
+	}
+
+	video.getNouveautes(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
 router.get('/favori', function(req, res, next) {
@@ -97,7 +103,7 @@ router.get('/favori', function(req, res, next) {
 		res.render('favori', {title : 'Toutes vos vidéos favorites',  video : result, user : req.user});
 	}
 
-	video.getByCategory(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
+	video.getFavoris(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
 module.exports = router;

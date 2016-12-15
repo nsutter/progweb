@@ -25,14 +25,14 @@ function extractionDesCategories(rows)
 module.exports =
 {
   // récupère toutes les vidéos
-  getAll: function(callback)
+  getAllVideos: function(callback)
   {
     connection.query("SELECT * FROM VIDEO", function(err, rows){
       callback(err, rows, extractionDesCategories(rows));
     });
   },
   // récupère les vidéos de la catégorie category
-  getByCategory: function(callback, category)
+  getAllVideosByCategory: function(callback, category)
   {
     connection.query("SELECT * FROM VIDEO WHERE Categorie = ?", [category], function(err, rows){
       callback(err, rows);
@@ -47,8 +47,8 @@ module.exports =
   },
   // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
   getNouveautes: function(callback, login)
-  {  // TO-DO : ajouté depuis - 2 semaines
-    connection.query("SELECT * FROM ABONEMENT a, VIDEO v, DIFFUSION d WHERE a.Login = ? AND a.NomEmission = v.NomEmission AND v.IdVideo = d.IdVideo", [login], function(err, rows){
+  {
+    connection.query("SELECT * FROM ABONEMENT a, VIDEO v WHERE a.Login = ? AND a.NomEmission = v.NomEmission AND CURDATE() < v.DateFinDiff", [login], function(err, rows){
       callback(err, rows);
     });
   },
