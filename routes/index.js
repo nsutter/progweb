@@ -13,6 +13,16 @@ function isLoggedIn(req, res, next) {
 	res.redirect('/');
 }
 
+// middleware de vérification de l'authentification et de l'administration
+function isLoggedIn(req, res, next) {
+  // l'utilisateur est connecté et administrateur, on continue
+	if(req.isAuthenticated() && req.user.admin == 'T')
+		return next();
+
+	// sinon on redirige vers l'accueil
+	res.redirect('/');
+}
+
 /* GET page d'accueil */
 router.get('/', function(req, res, next) {
   function aff(err, result, categories) {
