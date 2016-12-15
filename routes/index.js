@@ -14,7 +14,7 @@ function isLoggedIn(req, res, next) {
 }
 
 // middleware de vérification de l'authentification et de l'administration
-function isLoggedIn(req, res, next) {
+function isLoggedInAndAdmin(req, res, next) {
   // l'utilisateur est connecté et administrateur, on continue
 	if(req.isAuthenticated() && req.user.admin == 'T')
 		return next();
