@@ -62,11 +62,28 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
 
 /* GET page d'affichage d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
-  function aff(err, result, estFavori, estAbonne) {
-		render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : estFavori, estAbonne : estAbonne});
-  }
-
-  video.getOneById(aff, req.params.idVideo);
+	if(req.user)
+	{
+		function aff(err, result, estFavori, estAbonne) {
+			var a, f;
+			if(estFavori)
+				f=1;
+			else
+				f=0;
+			if(estAbonne)
+				a=1;
+			else
+				a=0;
+			res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : f, estAbonne : a});
+		}
+		video.getOneById(aff, req.user.Login, req.params.idVideo);
+	}
+	else{
+		function aff(err, result) {
+			res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : 0, estAbonne : 0});
+		}
+		video.getOneById_notco(aff, req.params.idVideo);
+	}
 });
 
 /* GET page d'affichage des vidéos d'une catégorie */

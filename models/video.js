@@ -33,6 +33,7 @@ module.exports =
       callback(err, rows, extractionDesCategories(rows));
     });
   },
+
   // récupère les vidéos de la catégorie category
   getAllVideosByCategory: function(callback, category)
   {
@@ -40,17 +41,28 @@ module.exports =
       callback(err, rows);
     });
   },
+
   // récupère la vidéo d'identifiant id
-  getOneById(callback, id)
+  getOneById(callback, usr, id)
   {
     connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows, id){
-      connection.query("SELECT * FROM VIDEO v, FAVORIS f WHERE ? = ?", [id, id], function(err, rows2, rows, id){
-        connection.query("SELECT * FROM VIDEO v, ABONEMENT f WHERE ? = ?", [id, id], function(err, rows3, rows2, rows){
-          callback(err, rows, rows2.length, rows3.length); // vidéo résultat, favori, abonnement
+      var video= rows;
+      connection.query("SELECT * FROM FAVORIS WHERE IdVideo = ? AND Login = ?", [id, usr], function(err, rows, videos, id, usr){
+        var favori= rows;
+        connection.query("SELECT * FROM VIDEO v, ABONEMENT f WHERE v.NomEmission = f.NomEmission AND f.Login = ? AND v.IdVideo = ?", [usr, id], function(err, rows, videos, favori, id, usr){
+          callback(err, video, favori, rows); // vidéo résultat, favori, abonnement
         })
       });
     });
   },
+
+  getOneById_notco(callback, id)
+  {
+    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows){
+      callback(err, rows); // vidéo résultat, favori, abonnement
+    });
+  },
+
   // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
   getNouveautes: function(callback, login)
   {
@@ -58,6 +70,7 @@ module.exports =
       callback(err, rows);
     });
   },
+
   // récupère les vidéos favoris de l'utilisateur
   getFavoris: function(callback, login)
   {
