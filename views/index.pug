@@ -4,7 +4,7 @@ block content
 
   .container-fluid
     .row
-      .col-md-2.pull-left
+      .col-md-2.col-sm-12.col-xs-12.pull-left
         - var lgc = categories.length;
         - var ic = 0;
         h2 Liste des catégories
@@ -16,26 +16,24 @@ block content
               a(href='/categorie/'+categories[ic]) #{categories[ic]}
             - ic = ic + 1;
       br
-      .col-md-10
-        .container
-          - var lg = video.length;
-          - var i = 0;
-            if lg >= 1
-              .row
-                while i < lg
-                  if i%3 == 0
-                    .row
-                  .col-lg-4.col-md-6.col-sm-12
-                    .well
-                      a(href="/video/"+video[i].IdVideo)
-                        .center
-                          img#img_accueil(src="http://img.youtube.com/vi/"+video[i].IdVideo+"/0.jpg")
-                          h2
-                            | #{video[i].NomEmission}
-                          h3
-                            | #{video[i].Description}
-                          br
-                          | Categorie: #{video[i].Categorie}
+      .col-md-10.col-sm-12
+        - var lg = video.length;
+        - var i = 0;
+          if lg >= 1
+              while i < lg
+                if i%3 == 0
+                  .row
+                .col-lg-4.col-md-6.col-sm-12
+                  .well
+                    a(href="/video/"+video[i].IdVideo)
+                      .center
+                        img#img_accueil(src="http://img.youtube.com/vi/"+video[i].IdVideo+"/0.jpg")
+                        h2
+                          | #{video[i].NomEmission}
+                        h3
+                          | #{video[i].Description}
                         br
-                        br
-                  - i = i + 1
+                        | Categorie: #{video[i].Categorie}
+                      br
+                      br
+                - i = i + 1
