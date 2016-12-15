@@ -21,9 +21,11 @@ block content
       .col-md-12
         - var lg = video.length;
         - var i = 0;
-          if lg >= 1
-            .row
-              h2 Toutes vos vidéos favorites
+          .row
+            h2 Toutes vos vidéos favorites
+            if video.length == 0
+              p Aucune vidéo :/
+            else
               while i < lg
                 .col-lg-4.col-md-6.col-sm-12
                   .well

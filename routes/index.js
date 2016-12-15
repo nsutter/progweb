@@ -90,7 +90,14 @@ router.get('/nouveaute', function(req, res, next) {
 });
 
 router.get('/favori', function(req, res, next) {
-  // TO-DO
+	function aff(err, result) {
+		if(err)
+			res.redirect('/');
+
+		res.render('favori', {title : 'Toutes vos vidéos favorites',  video : result, user : req.user});
+	}
+
+	video.getByCategory(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
 module.exports = router;
