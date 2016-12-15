@@ -111,4 +111,15 @@ router.get('/favori', function(req, res, next) {
 	video.getFavoris(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
+router.get('/administration', isLoggedInAndAdmin, function(req, res, next) {
+	function aff(err, videos, utilisateurs, favoris) {
+		if(err)
+			res.redirect('/');
+
+		res.render('administration/administration', {title : 'Interface d\'administration', videos : videos, utilisateurs : utilisateurs, favoris : favoris, user : req.user});
+	}
+
+	video.getAllForAdmin(aff);
+})
+
 module.exports = router;
