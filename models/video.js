@@ -58,5 +58,27 @@ module.exports =
     connection.query("SELECT * FROM FAVORIS f, VIDEO v WHERE f.Login = ? AND f.IdVideo = v.IdVideo", [login], function(err, rows){
       callback(err, rows);
     });
+  },
+
+  // insère un favori pour l'utilisateur Login
+  setFavori: function(Login, Mdp, IdVideo)
+  {
+    connection.query("SELECT * FROM UTILISATEUR u WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows, Login, IdVideo){
+      if(rows.length == 1)
+      {
+        connection.query("INSERT INTO FAVORIS VALUES (?,?)", [Login, IdVideo], function(err, rows){})
+      }
+    });
+  }
+
+  // insère un abonnement pour l'utilisateur Login
+  setAbonnement: function(Login, Mdp, NomEmission)
+  {
+    connection.query("SELECT * FROM UTILISATEUR u WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows, Login, NomEmission){
+      if(rows.length == 1)
+      {
+        connection.query("INSERT INTO ABONEMENT VALUES (?,?)", [Login, NomEmission], function(err, rows){})
+      }
+    });
   }
 }
