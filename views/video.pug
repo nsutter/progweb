@@ -13,8 +13,12 @@ block content
         br
         br
         if user
-          a.btn.btn-primary.favoris(role='button')
-            | Mettre en favoris&nbsp;
+          if estFavori == 0
+            a.btn.btn-primary.favoris(role='button')
+              | Mettre en favoris&nbsp;
+          if estAbonnee == 0
+            a.btn.btn-danger.abonnee(role='button')
+              | S'abonnee&nbsp;
         | &nbsp;Episode #{video[0].NumEpisode}
         | Categorie #{video[0].Categorie}
         br
@@ -28,10 +32,17 @@ block content
     script.
       var socket = io.connect('http://localhost:3001');
 
-      socket.on('rm', function(data) {
+      socket.on('rm-fav', function(data) {
         $('.favoris').remove();
+        socket.close();
+      });
+      socket.on('rm-abo', function(data) {
+        $('.abonnee').remove();
         socket.close();
       });
       $('.favoris').click(function() {
         socket.emit('favoris', '#{video[0].IdVideo}', '#{user.Mdp}', '#{user.Login}');
+      });
+      $('.abonnee').click(function() {
+        socket.emit('abonnee', '#{video[0].IdVideo}', '#{user.Mdp}', '#{user.Login}');
       });

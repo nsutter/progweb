@@ -14,7 +14,13 @@ module.exports = function(passport){
 			// console.log(data.vid);
       //ajouter en favoris
 			// var userId = socket.request.session.passport.user;
-      socket.emit('rm');
+      socket.emit('rm-fav');
+    });
+		socket.on('abonnee', function(vid, Mdp, log) {
+			// console.log(data.vid);
+      //ajouter en favoris
+			// var userId = socket.request.session.passport.user;
+      socket.emit('rm-abo');
     });
 
 	});
