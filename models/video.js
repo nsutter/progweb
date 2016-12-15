@@ -24,6 +24,8 @@ function extractionDesCategories(rows)
 
 module.exports =
 {
+  // RECUPERATION
+
   // récupère toutes les vidéos
   getAllVideos: function(callback)
   {
@@ -41,8 +43,12 @@ module.exports =
   // récupère la vidéo d'identifiant id
   getOneById(callback, id)
   {
-    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows){
-      callback(err, rows);
+    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows, id){
+      connection.query("SELECT * FROM VIDEO v, FAVORIS f WHERE ? = ?", [id, id], function(err, rows2, rows, id){
+        connection.query("SELECT * FROM VIDEO v, ABONEMENT f WHERE ? = ?", [id, id], function(err, rows3, rows2, rows){
+          callback(err, rows, rows2.length, rows3.length); // vidéo résultat, favori, abonnement
+        })
+      });
     });
   },
   // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
@@ -60,6 +66,8 @@ module.exports =
     });
   },
 
+  // INSERTION
+
   // insère un favori pour l'utilisateur Login
   setFavori: function(Login, Mdp, IdVideo)
   {
@@ -69,7 +77,7 @@ module.exports =
         connection.query("INSERT INTO FAVORIS VALUES (?,?)", [Login, IdVideo], function(err, rows){})
       }
     });
-  }
+  },
 
   // insère un abonnement pour l'utilisateur Login
   setAbonnement: function(Login, Mdp, NomEmission)

@@ -62,11 +62,8 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
 
 /* GET page d'affichage d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
-  function aff(err, result) {
-    if(err)
-      res.redirect('/');
-
-    res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user});
+  function aff(err, result, estFavori, estAbonne) {
+		render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : estFavori, estAbonne : estAbonne});
   }
 
   video.getOneById(aff, req.params.idVideo);
