@@ -2,6 +2,8 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var video = require('../models/video');
+var administration = require('../models/administration');
+var utilisateur = require('../models/utilisateur');
 
 // middleware de vérification de l'authentification
 function isLoggedIn(req, res, next) {
@@ -122,14 +124,14 @@ router.get('/favori', function(req, res, next) {
 });
 
 router.get('/administration', isLoggedInAndAdmin, function(req, res, next) {
-	function aff(err, videos, utilisateurs, favoris) {
+	function aff(err, utilisateurs, videos, favoris) {
 		if(err)
 			res.redirect('/');
 
 		res.render('administration/administration', {title : 'Interface d\'administration', videos : videos, utilisateurs : utilisateurs, favoris : favoris, user : req.user});
 	}
 
-	video.getAllForAdmin(aff);
+	administration.getAll(aff);
 })
 
 module.exports = router;
