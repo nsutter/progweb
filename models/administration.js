@@ -3,10 +3,10 @@ var db = require('../config/database');
 
 var connection = mysql.createConnection(db.connection);
 
+// MODELE ADMINISTRATION
 module.exports =
 {
-  // RECUPERATION
-
+  // récupération des utilisateurs, des vidéos et des favoris
   getAll(callback, usr, id)
   {
     connection.query("SELECT * FROM UTILISATEUR WHERE admin = 'F'", function(err, rows){

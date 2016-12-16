@@ -3,6 +3,7 @@ var db = require('../config/database');
 
 var connection = mysql.createConnection(db.connection);
 
+// MODELE UTILISATEUR
 module.exports =
 {
   // récupération d'un utilisateur en fonction de son Login
@@ -16,7 +17,7 @@ module.exports =
   // modification d'un utilisateur en fonction de son Login
   update(arg, id)
   {
-    if(arg.Newsletter)
+    if(arg.Newsletter) // on formate correctement la newsletter et l'admin
     {
       var newsletter = 'T';
     }
@@ -24,7 +25,6 @@ module.exports =
     {
       var newsletter = 'F';
     }
-
 
     if(arg.Admin)
     {

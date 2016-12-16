@@ -34,26 +34,27 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// vers les contrôleurs admin
 app.use('/administration', admin);
+// vers les contrôleurs classiques
 app.use('/', index);
 
 var socket = require('./routes/socket')(passport);
 app.use('/', socket);
 
-// catch 404 and forward to error handler
+// gestion de la 404
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
+// gestion d'erreur
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // rendu de la page d'erreur
   res.status(err.status || 500);
   res.render('error');
 });
