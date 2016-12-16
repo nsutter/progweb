@@ -16,6 +16,7 @@ function isLoggedInAndAdmin(req, res, next) {
 	res.redirect('/');
 }
 
+/* GET page d'accueil de l'administration */
 router.get('/', isLoggedInAndAdmin, function(req, res, next) {
 	function aff(err, utilisateurs, videos, favoris) {
 		if(err)
@@ -45,17 +46,6 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
-router.post('/video/:IdVideo', isLoggedInAndAdmin, function(req, res, next){
-	video.update(req.body, req.params.IdVideo);
-	res.redirect('/administration');
-})
-
-// route de suppression d'une vidéo
-router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
-	video.deleteOneById(req.params.idVideo);
-	res.redirect('/administration');
-})
-
 /* GET page d'affichage de la modification d'une utilisateur */
 router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res, next) {
 	function aff(err, result) {
@@ -65,8 +55,25 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
+// MISE A JOUR
+
+// mise à jour d'un utilisateur
 router.post('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res, next){
 	utilisateur.update(req.body, req.params.idUtilisateur);
+	res.redirect('/administration');
+})
+
+// mise à jour d'une vidéo
+router.post('/video/:IdVideo', isLoggedInAndAdmin, function(req, res, next){
+	video.update(req.body, req.params.IdVideo);
+	res.redirect('/administration');
+})
+
+// SUPPRESSION
+
+// route de suppression d'une vidéo
+router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
+	video.deleteOneById(req.params.idVideo);
 	res.redirect('/administration');
 })
 
