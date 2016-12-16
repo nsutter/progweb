@@ -69,6 +69,7 @@ router.get('/video/:idVideo', function(req, res, next) {
 		function aff(err, result, estFavori, estAbonne) {
 			res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : estFavori, estAbonne : estAbonne});
 		}
+		video.addHistorique(req.params.idVideo, req.user.Login);
 		video.getOneById(aff, req.user.Login, req.params.idVideo);
 	}
 	else{
@@ -111,6 +112,17 @@ router.get('/favori', function(req, res, next) {
 	}
 
 	video.getFavoris(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
+});
+
+router.get('/recommandation', isLoggedIn, function(req, res, next) {
+	function aff(err, result) {
+		if(err)
+			res.redirect('/');
+
+		res.render('recommandation', {title : 'Toutes vos recommandations',  video : result, user : req.user});
+	}
+
+	video.getPopulars(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
 module.exports = router;

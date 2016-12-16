@@ -79,7 +79,7 @@ module.exports =
     {
       var multilangue = 'F';
     }
-    connection.query("UPDATE VIDEO SET IdVideo = ?, NomEmission = ?, NumEpisode = ?, Description = ?, Categorie = ?, MultiLangue = ?, FormatImage = ?, Duree = ?, DateFinDroit = ?, DateFinDiff = ?, Pays = ? WHERE IdVideo = ?", [arg.IdVideo, arg.NomEmission, arg.NumEpisode, arg.Description, arg.Categorie, multilangue, arg.FormatImage, arg.Duree, arg.DateFinDroit, arg.DateFinDiff, arg.Pays, id], function(err){
+    connection.query("UPDATE VIDEO SET NomEmission = ?, NumEpisode = ?, Description = ?, Categorie = ?, MultiLangue = ?, FormatImage = ?, Duree = ?, DateFinDroit = ?, DateFinDiff = ?, Pays = ? WHERE IdVideo = ?", [arg.NomEmission, arg.NumEpisode, arg.Description, arg.Categorie, multilangue, arg.FormatImage, arg.Duree, arg.DateFinDroit, arg.DateFinDiff, arg.Pays, id], function(err){
       console.log(err);
     });
   },
