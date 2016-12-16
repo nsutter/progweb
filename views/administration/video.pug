@@ -11,7 +11,7 @@ block content
           .embed-container
             iframe(src='https://www.youtube.com/embed/'+video[0].IdVideo, allowfullscreen='')
           .well
-            form(role='form', action='/admin/video', method='post', enctype='plain')
+            form(role='form', action='/administration/video/'+video[0].IdVideo, method='post', enctype='plain')
               .form-group
                 label.gris(for='IdVideo') IdVideo
                 input.form-control(type='text', name='IdVideo', value=video[0].IdVideo, required='required')
@@ -56,3 +56,6 @@ block content
                 input.form-control(type='text', name='Pays', value=video[0].Pays)
 
               button.btn.btn-large.btn-success(type='submit') Modifier !
+            br
+            form(role='form', action='/admin/deleteVideo/'+ video[0].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer votre cette video?');")
+              button.btn.btn-large.btn-danger(type='submit') Supprimer la video !
