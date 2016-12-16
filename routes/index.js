@@ -94,7 +94,7 @@ router.get('/categorie/:idCategorie', function(req, res, next) {
 });
 
 /* GET page d'affichage des nouveautés personnalisés */
-router.get('/nouveaute', isLoggedIn, Lfunction(req, res, next) {
+router.get('/nouveaute', isLoggedIn, function(req, res, next) {
 	function aff(err, result) {
 		if(err)
 			res.redirect('/');
