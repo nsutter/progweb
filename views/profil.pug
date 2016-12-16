@@ -38,3 +38,6 @@ block content
                 input.form-control(type='text', name='Nationalite', value=user.Nationnalite)
 
               button.btn.btn-large.btn-success(type='submit') Modifier !
+            br
+            form(role='form', action='/suppressionCompte', method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer votre compte?');")
+              button.btn.btn-large.btn-danger(type='submit') Supprimer mon compte !

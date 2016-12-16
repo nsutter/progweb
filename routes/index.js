@@ -77,6 +77,11 @@ router.post('/profil', isLoggedIn, function(req, res, next) {
 	res.redirect('/');
 });
 
+router.post('/suppressionCompte', isLoggedIn, function(req, res, next){
+	utilisateur.deleteOneById(req.user.Login);
+	res.redirect('/');
+});
+
 /* GET page d'affichage d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
 	if(req.user) // si on est connecté
