@@ -48,6 +48,7 @@ router.post('/inscription', passport.authenticate('local-signup', {
 		failureRedirect : '/inscription', // page d'inscription en cas d'échec
 }));
 
+/* GET page de connexion */
 router.get('/connexion', function(req, res) {
     res.render('connexion', {user : req.user});
 });
@@ -72,7 +73,7 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
 
 /* GET page d'affichage d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
-	if(req.user)
+	if(req.user) // si on est connecté
 	{
 		function aff(err, result, estFavori, estAbonne) {
 			res.render('video', {title : 'Vidéo : ' + result[0].NomEmission,  video : result, user : req.user, estFavori : estFavori, estAbonne : estAbonne});
@@ -100,7 +101,8 @@ router.get('/categorie/:idCategorie', function(req, res, next) {
   video.getAllVideosByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
 });
 
-router.get('/nouveaute', function(req, res, next) {
+/* GET page d'affichage des nouveautés personnalisés */
+router.get('/nouveaute', isLoggedIn, Lfunction(req, res, next) {
 	function aff(err, result) {
 		if(err)
 			res.redirect('/');
@@ -111,7 +113,8 @@ router.get('/nouveaute', function(req, res, next) {
 	video.getNouveautes(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
-router.get('/favori', function(req, res, next) {
+/* GET page d'affichage des vidéos favorites */
+router.get('/favori', isLoggedIn, function(req, res, next) {
 	function aff(err, result) {
 		if(err)
 			res.redirect('/');
@@ -122,6 +125,7 @@ router.get('/favori', function(req, res, next) {
 	video.getFavoris(aff, req.user.Login); // on récupère les vidéos - partie "modèle"
 });
 
+/* GET page d'affichage des vidéos recommandés */
 router.get('/recommandation', isLoggedIn, function(req, res, next) {
 	function aff(err, result) {
 		if(err)

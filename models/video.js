@@ -22,6 +22,7 @@ function extractionDesCategories(rows)
   return res;
 }
 
+// MODELE VIDEO
 module.exports =
 {
   // RECUPERATION
@@ -42,11 +43,6 @@ module.exports =
     });
   },
 
-  addHistorique: function(id, login)
-  {
-    connection.query("INSERT INTO HISTORIQUE (IdVideo, DateVisionnage, Login) VALUES (?, CURDATE(), ?)", [id, login], function(err, rows){})
-  },
-
   // récupère la vidéo d'identifiant id
   getOneById(callback, usr, id)
   {
@@ -61,6 +57,7 @@ module.exports =
     });
   },
 
+  // récupère la vidéo d'identifiant sans gestion des favoris et des abonnements
   getOneById_notco(callback, id)
   {
     connection.query("SELECT * FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){
@@ -74,6 +71,7 @@ module.exports =
     connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
   },
 
+  // ajout d'une vidéo (contenu = arg)
   add(arg)
   {
     if(arg.Multilangue)
@@ -89,6 +87,7 @@ module.exports =
     });
   },
 
+  // mise à jour d'une vidéo (contenu = arg)
   update(arg, id)
   {
     if(arg.Multilangue)
@@ -112,7 +111,7 @@ module.exports =
     });
   },
 
-  // récupère les vidéos favoris de l'utilisateur
+  // récupère les vidéos favoris de l'utilisateur login
   getFavoris: function(callback, login)
   {
     connection.query("SELECT * FROM FAVORIS f, VIDEO v WHERE f.Login = ? AND f.IdVideo = v.IdVideo", [login], function(err, rows){
@@ -132,7 +131,7 @@ module.exports =
      })
  },
 
-  // INSERTION
+  // INSERTION ET SUPPRESSION
 
   // insère un favori pour l'utilisateur Login
   setFavori: function(Login, Mdp, IdVideo)
@@ -180,4 +179,10 @@ module.exports =
       }
     });
   },
+
+  // insère une entrée dans l'historique
+  addHistorique: function(id, login)
+  {
+    connection.query("INSERT INTO HISTORIQUE (IdVideo, DateVisionnage, Login) VALUES (?, CURDATE(), ?)", [id, login], function(err, rows){})
+  }
 }
