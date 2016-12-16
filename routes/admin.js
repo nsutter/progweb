@@ -45,4 +45,8 @@ router.get('/utilisateur/:idUtilisateur', function(req, res, next) {
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
+router.post('/suppression/favori/:idFavori', function(res, res, next) {
+	
+});
+
 module.exports = router;
