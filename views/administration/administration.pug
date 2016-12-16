@@ -24,7 +24,7 @@ block content
                     ul
                     while ivideos < lgvideos
                       li
-                        a(href="#{videos[ivideos]}.IdVideo") #{videos[ivideos].NomEmission}
+                        a(href="/administration/video/"+videos[ivideos].IdVideo) #{videos[ivideos].NomEmission}
                       - ivideos = ivideos + 1
 
           #tabUtilisateurs.tab-pane.fade
