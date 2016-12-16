@@ -10,43 +10,52 @@ block content
           h1= title
           .embed-container
             iframe(src='https://www.youtube.com/embed/'+video[0].IdVideo, allowfullscreen='')
-            .well
-              form(role='form', action='/admin/video', method='post', enctype='plain')
-                .form-group
-                  label.gris(for='IdVideo') IdVideo
-                  input.form-control(type='text', name='IdVideo', value='#{video[0].IdVideo}', required='required')
-                .form-group
-                  label.gris(for='NomEmission') NomEmission
-                  input.form-control(type='text', name='NomEmission', value='#{video[0].NomEmission}', required='required')
-                .form-group
-                  label.gris(for='NumEpisode') NumEpisode
-                  input.form-control(type='text', name='NumEpisode', value='#{video[0].NumEpisode}', required='required')
-                .form-group
-                  label.gris(for='Description') Description
-                  input.form-control(type='text', name='Description', value='#{video[0].Description}', required='required')
-                .form-group
-                  label.gris(for='Categorie') Categorie
-                  input.form-control(type='text', name='Categorie', value='#{video[0].Categorie}', required='required')
-                .form-group
-                  label.gris(for='NomEmission') NomEmission
-                  input.form-control(type='text', name='NomEmission', value='#{video[0].NomEmission}', required='required')
-                .form-group
-                  label.gris(for='Multilangue') Multilangue
-                  label.switch
+          .well
+            form(role='form', action='/administration/video/'+video[0].IdVideo, method='post', enctype='plain')
+              .form-group
+                label.gris(for='IdVideo') IdVideo
+                input.form-control(type='text', name='IdVideo', value=video[0].IdVideo, required='required')
+              .form-group
+                label.gris(for='NomEmission') NomEmission
+                input.form-control(type='text', name='NomEmission', value=video[0].NomEmission, required='required')
+              .form-group
+                label.gris(for='NumEpisode') NumEpisode
+                input.form-control(type='text', name='NumEpisode', value=video[0].NumEpisode, required='required')
+              .form-group
+                label.gris(for='Description') Description
+                input.form-control(type='text', name='Description', value=video[0].Description, required='required')
+              .form-group
+                label.gris(for='Categorie') Categorie
+                input.form-control(type='text', name='Categorie', value=video[0].Categorie, required='required')
+              .form-group
+                label.gris(for='NomEmission') NomEmission
+                input.form-control(type='text', name='NomEmission', value=video[0].NomEmission, required='required')
+              .form-group
+                label.gris(for='Multilangue') Multilangue
+                label.switch
+                  if video[0].MultiLangue == "F"
                     input(type='checkbox', name="Multilangue")
                     .slider.round
-                .form-group
-                  label.gris(for='FormatImage') FormatImage
-                  input.form-control(type='text', name='FormatImage', value='#{video[0].FormatImage}')
-                .form-group
-                  label.gris(for='Duree') Duree
-                  input.form-control(type='text', name='Duree', value='#{video[0].Duree}')
-                .form-group
-                  input.form-control(type='date', name="DateFinDroit", placeholder='Date fin de droit - (YYYY-MM-DD)', value='#{video[0].DateFinDroit}')
-                .form-group
-                  input.form-control(type='date', name="DateFinDiff", placeholder='Date fin de diffusion - (YYYY-MM-DD)', value='#{video[0].DateFinDiff}')
-                .form-group
-                  label.gris(for='Pays') Pays
-                  input.form-control(type='text', name='Pays', value='#{video[0].Pays}')
+                  else
+                      input(type='checkbox', name="Multilangue", checked= "")
+                      .slider.round
+              .form-group
+                label.gris(for='FormatImage') FormatImage
+                input.form-control(type='text', name='FormatImage', value=video[0].FormatImage)
+              .form-group
+                label.gris(for='Duree') Duree
+                input.form-control(type='text', name='Duree', value=video[0].Duree)
+              .form-group
+                label.gris(for='DateFinDroit') Date fin droit
+                input.form-control(type='date', name="DateFinDroit", placeholder='Date fin de droit - (YYYY-MM-DD)', value=video[0].DateFinDroit)
+              .form-group
+                label.gris(for='DateFinDiff') Date fin diffusion
+                input.form-control(type='date', name="DateFinDiff", placeholder='Date fin de diffusion - (YYYY-MM-DD)', value=video[0].DateFinDiff)
+              .form-group
+                label.gris(for='Pays') Pays
+                input.form-control(type='text', name='Pays', value=video[0].Pays)
 
-                button.btn.btn-large.btn-success(type='submit') Modifier !
+              button.btn.btn-large.btn-success(type='submit') Modifier !
+            br
+            form(role='form', action='/admin/deleteVideo/'+ video[0].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer votre cette video?');")
+              button.btn.btn-large.btn-danger(type='submit') Supprimer la video !
