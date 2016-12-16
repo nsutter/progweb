@@ -71,14 +71,25 @@ router.post('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res
 })
 
 // route de suppression d'un favori
-router.post('/deleteFavori/:Login/:IdVideo', function(req, res, next) {
+router.post('/deleteFavori/:Login/:IdVideo', isLoggedInAndAdmin, function(req, res, next) {
 	video.deleteFavori(req.params.Login, req.params.IdVideo);
 	res.redirect('/administration');
 });
 
 // route de suppresion d'un utilisateur
-router.post('/deleteUtilisateur/:Login', function(req, res, next) {
+router.post('/deleteUtilisateur/:Login', isLoggedInAndAdmin, function(req, res, next) {
 	utilisateur.deleteOneById(req.params.Login);
+	res.redirect('/administration');
+});
+
+// AJOUT D'UNE VIDÉO
+
+router.get('/nouvelleVideo', isLoggedInAndAdmin, function(req, res, next) {
+	res.render('administration/nouvelleVideo', {title : 'Ajout d\'une vidéo'});
+});
+
+router.post('/nouvelleVideo', isLoggedInAndAdmin, function(req, res, next) {
+	video.add(req.body);
 	res.redirect('/administration');
 });
 

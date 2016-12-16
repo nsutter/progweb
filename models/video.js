@@ -74,6 +74,21 @@ module.exports =
     connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
   },
 
+  add(arg)
+  {
+    if(arg.Multilangue)
+    {
+      var multilangue = 'T';
+    }
+    else
+    {
+      var multilangue = 'F';
+    }
+    connection.query("INSERT INTO VIDEO VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [arg.IdVideo, arg.NomEmission, arg.NumEpisode, arg.Description, arg.Categorie, multilangue, arg.FormatImage, arg.Duree, "",arg.DateFinDroit, arg.DateFinDiff, arg.Pays], function(err){
+      console.log(err);
+    });
+  },
+
   update(arg, id)
   {
     if(arg.Multilangue)
@@ -104,6 +119,18 @@ module.exports =
       callback(err, rows);
     });
   },
+
+  // récupère les vidéos recommandées de l'utilisateur login
+   getPopulars: function(callback, login)
+   {
+     console.log(login);
+
+     connection.query("SELECT *, COUNT(*) FROM VIDEO v, CATEGORIEU c, HISTORIQUE h WHERE c.Login = ? AND c.categorie = v.categorie AND v.IdVideo = h.IdVideo GROUP BY v.IdVideo ORDER BY COUNT(*) DESC", [login], function(err, rows)
+     {
+       console.log(rows);
+       callback(err, rows);
+     })
+ },
 
   // INSERTION
 
