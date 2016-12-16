@@ -184,5 +184,11 @@ module.exports =
   addHistorique: function(id, login)
   {
     connection.query("INSERT INTO HISTORIQUE (IdVideo, DateVisionnage, Login) VALUES (?, CURDATE(), ?)", [id, login], function(err, rows){})
+  },
+
+  // insère une catégorie appréciée par un utilisateur
+  addCategory: function(login, category)
+  {
+    connection.query("INSERT INTO CATEGORIEU VALUES (?,?)", [category, login], function(err, rows){});
   }
 }
