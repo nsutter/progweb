@@ -45,6 +45,11 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
+router.post('/video/:IdVideo', isLoggedInAndAdmin, function(req, res, next){
+	video.update(req.body, req.params.IdVideo);
+	res.redirect('/');
+})
+
 router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
 	video.deleteOneById(req.params.idVideo);
 	res.redirect('/');

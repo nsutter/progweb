@@ -63,6 +63,27 @@ module.exports =
     });
   },
 
+  // supprime une vidéo en fonction d'IdVideo
+  deleteOneById(id)
+  {
+    connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
+  },
+
+  update(arg, id)
+  {
+    if(arg.Multilangue)
+    {
+      var multilangue = 'T';
+    }
+    else
+    {
+      var multilangue = 'F';
+    }
+    connection.query("UPDATE VIDEO SET NomEmission = ?, NumEpisode = ?, Description = ?, Categorie = ?, MultiLangue = ?, FormatImage = ?, Duree = ?, DateFinDroit = ?, DateFinDiff = ?, Pays = ? WHERE IdVideo = ?", [arg.NomEmission, arg.NumEpisode, arg.Description, arg.Categorie, multilangue, arg.FormatImage, arg.Duree, arg.DateFinDroit, arg.DateFinDiff, arg.Pays, id], function(err){
+      console.log(err);
+    });
+  },
+
   // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
   getNouveautes: function(callback, login)
   {
@@ -71,29 +92,12 @@ module.exports =
     });
   },
 
-  // récupère les vidéos favoris de l'utilisateur login
+  // récupère les vidéos favoris de l'utilisateur
   getFavoris: function(callback, login)
   {
     connection.query("SELECT * FROM FAVORIS f, VIDEO v WHERE f.Login = ? AND f.IdVideo = v.IdVideo", [login], function(err, rows){
       callback(err, rows);
     });
-  },
-
-  // récupère les vidéos recommandées de l'utilisateur login
-  getPopulars: function(callback, login)
-  {
-    console.log(login);
-
-    connection.query("SELECT *, COUNT(*) FROM VIDEO v, CATEGORIEU c, HISTORIQUE h WHERE c.Login = ? AND c.categorie = v.categorie AND v.IdVideo = h.IdVideo GROUP BY v.IdVideo ORDER BY COUNT(*) DESC", [login], function(err, rows)
-    {
-      console.log(rows);
-      callback(err, rows);
-    })
-  },
-
-  addHistorique: function(id, login)
-  {
-    connection.query("INSERT INTO HISTORIQUE (IdVideo, DateVisionnage, Login) VALUES (?, CURDATE(), ?)", [id, login], function(err, rows){})
   },
 
   // INSERTION
@@ -109,6 +113,12 @@ module.exports =
     });
   },
 
+  // supprime un favori en fonction du Login et d'IdVideo
+  deleteFavori: function(Login, IdVideo)
+  {
+    connection.query("DELETE FROM FAVORIS WHERE Login = ? AND IdVideo = ?", [Login, IdVideo], function(err, rows){});
+  },
+
   // insère un abonnement pour l'utilisateur Login
   setAbonnement: function(Login, Mdp, NomEmission)
   {
@@ -119,18 +129,4 @@ module.exports =
       }
     });
   },
-
-  // SUPPRESSION
-
-  // supprime une vidéo en fonction d'IdVideo
-  deleteOneById(id)
-  {
-    connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
-  },
-
-  // supprime un favori en fonction du Login et d'IdVideo
-  deleteFavori: function(Login, IdVideo)
-  {
-    connection.query("DELETE FROM FAVORIS WHERE Login = ? AND IdVideo = ?", [Login, IdVideo], function(err, rows){});
-  }
 }
