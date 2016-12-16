@@ -39,7 +39,7 @@ router.get('/video/:idVideo', isLoggedInAndAdmin, function(req, res, next) {
 /* GET page d'affichage de la modification d'un utilisateur */
 router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res, next) {
 	function aff(err, result) {
-		res.render('administration/utilisateur', {title : 'Modification de l\'utilisateur' + result[0].Prenom + " " + result[0].Nom,  utilisateur : result, user : req.user});
+		res.render('administration/utilisateur', {title : 'Modification de l\'utilisateur ' + result[0].Prenom + " " + result[0].Nom,  utilisateur : result, user : req.user});
 	}
 
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
@@ -47,12 +47,13 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 
 router.post('/video/:IdVideo', isLoggedInAndAdmin, function(req, res, next){
 	video.update(req.body, req.params.IdVideo);
-	res.redirect('/');
+	res.redirect('/administration');
 })
 
+// route de suppression d'une vidéo
 router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
 	video.deleteOneById(req.params.idVideo);
-	res.redirect('/');
+	res.redirect('/administration');
 })
 
 /* GET page d'affichage de la modification d'une utilisateur */
@@ -64,9 +65,21 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
+router.post('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res, next){
+	utilisateur.update(req.body, req.params.idUtilisateur);
+	res.redirect('/administration');
+})
+
+// route de suppression d'un favori
 router.post('/deleteFavori/:Login/:IdVideo', function(req, res, next) {
 	video.deleteFavori(req.params.Login, req.params.IdVideo);
-	res.redirect('/');
+	res.redirect('/administration');
+});
+
+// route de suppresion d'un utilisateur
+router.post('/deleteUtilisateur/:Login', function(req, res, next) {
+	utilisateur.deleteOneById(req.params.Login);
+	res.redirect('/administration');
 });
 
 module.exports = router;
