@@ -40,7 +40,7 @@ module.exports =
   },
 
   // modification de soi même
-  update(arg, id)
+  update_noadmin(arg, id)
   {
     if(arg.Newsletter) // on formate correctement la newsletter et l'admin
     {

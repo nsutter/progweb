@@ -74,7 +74,7 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
 /* POST modification de son profil */
 router.post('/profil', isLoggedIn, function(req, res, next) {
 	utilisateur.update_noadmin(req.body, req.user.Login);
-	res.redirect('/profil');
+	res.redirect('/');
 });
 
 /* GET page d'affichage d'une vidéo */
