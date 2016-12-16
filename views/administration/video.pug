@@ -57,5 +57,5 @@ block content
 
               button.btn.btn-large.btn-success(type='submit') Modifier !
             br
-            form(role='form', action='/admin/deleteVideo/'+ video[0].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer votre cette video?');")
+            form(role='form', action='/administration/deleteVideo/'+ video[0].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer votre cette video?');")
               button.btn.btn-large.btn-danger(type='submit') Supprimer la video !
