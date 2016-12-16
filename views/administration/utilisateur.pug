@@ -22,37 +22,31 @@ block content
                 label.gris(for='DateNaissance') DateNaissance
                 input.form-control(type='text', name='DateNaissance', value=utilisateur[0].DateNaissance, required='required')
               .form-group
-                label.gris(for='Categorie') Categorie
-                input.form-control(type='text', name='Categorie', value=utilisateur[0].Categorie, required='required')
+                label.gris(for='Email') Email
+                input.form-control(type='text', name='Email', value=utilisateur[0].Email, required='required')
               .form-group
-                label.gris(for='NomEmission') NomEmission
-                input.form-control(type='text', name='NomEmission', value=utilisateur[0].NomEmission, required='required')
-              .form-group
-                label.gris(for='Multilangue') Multilangue
+                label.gris(for='Newsletter') Newsletter
                 label.switch
-                  if video[0].MultiLangue == "F"
-                    input(type='checkbox', name="Multilangue")
+                  if utilisateur[0].Newsletter == "F"
+                    input(type='checkbox', name="Newsletter")
                     .slider.round
                   else
-                      input(type='checkbox', name="Multilangue", checked= "")
+                      input(type='checkbox', name="Newsletter", checked= "")
                       .slider.round
               .form-group
-                label.gris(for='FormatImage') FormatImage
-                input.form-control(type='text', name='FormatImage', value=video[0].FormatImage)
+                label.gris(for='Admin') Admin
+                label.switch
+                  if utilisateur[0].Admin == "F"
+                    input(type='checkbox', name="Admin")
+                    .slider.round
+                  else
+                      input(type='checkbox', name="Admin", checked= "")
+                      .slider.round
               .form-group
-                label.gris(for='Duree') Duree
-                input.form-control(type='text', name='Duree', value=video[0].Duree)
-              .form-group
-                label.gris(for='DateFinDroit') Date fin droit
-                input.form-control(type='date', name="DateFinDroit", placeholder='Date fin de droit - (YYYY-MM-DD)', value=video[0].DateFinDroit)
-              .form-group
-                label.gris(for='DateFinDiff') Date fin diffusion
-                input.form-control(type='date', name="DateFinDiff", placeholder='Date fin de diffusion - (YYYY-MM-DD)', value=video[0].DateFinDiff)
-              .form-group
-                label.gris(for='Pays') Pays
-                input.form-control(type='text', name='Pays', value=video[0].Pays)
+                label.gris(for='Nationalite') Nationalite
+                input.form-control(type='text', name='Nationalite', value=utilisateur[0].Nationnalite)
 
               button.btn.btn-large.btn-success(type='submit') Modifier !
             br
-            form(role='form', action='/administration/deleteVideo/'+ video[0].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer votre cette video?');")
-              button.btn.btn-large.btn-danger(type='submit') Supprimer la video !
+            form(role='form', action='/administration/deleteUtilisateur/'+ utilisateur[0].Login, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer cet utilisateur ?');")
+              button.btn.btn-large.btn-danger(type='submit') Supprimer l'utilisateur !
