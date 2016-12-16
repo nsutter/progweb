@@ -36,6 +36,15 @@ router.get('/video/:idVideo', isLoggedInAndAdmin, function(req, res, next) {
 	video.getOneById_notco(aff, req.params.idVideo);
 });
 
+/* GET page d'affichage de la modification d'un utilisateur */
+router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res, next) {
+	function aff(err, result) {
+		res.render('administration/utilisateur', {title : 'Modification de l\'utilisateur' + result[0].Prenom + " " + result[0].Nom,  utilisateur : result, user : req.user});
+	}
+
+	utilisateur.getOneById(aff, req.params.idUtilisateur);
+});
+
 router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
 	video.deleteOneById(req.params.idVideo);
 	res.redirect('/');
