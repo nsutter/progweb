@@ -11,6 +11,9 @@ block content
           .well
             form(role='form', action='/administration/nouvelleVideo', method='post', enctype='plain')
               .form-group
+                label.gris(for='IdVideo') IdVideo
+                input.form-control(type='text', name='IdVideo', required='required')
+              .form-group
                 label.gris(for='NomEmission') NomEmission
                 input.form-control(type='text', name='NomEmission', required='required')
               .form-group
@@ -42,5 +45,5 @@ block content
               .form-group
                 label.gris(for='Pays') Pays
                 input.form-control(type='text', name='Pays')
-                  
+
               button.btn.btn-large.btn-success(type='submit') Ajouter !

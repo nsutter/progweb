@@ -82,8 +82,15 @@ router.post('/deleteUtilisateur/:Login', isLoggedInAndAdmin, function(req, res, 
 	res.redirect('/administration');
 });
 
+// AJOUT D'UNE VIDÉO
+
 router.get('/nouvelleVideo', isLoggedInAndAdmin, function(req, res, next) {
 	res.render('administration/nouvelleVideo', {title : 'Ajout d\'une vidéo'});
+});
+
+router.post('/nouvelleVideo', isLoggedInAndAdmin, function(req, res, next) {
+	video.add(req.body);
+	res.redirect('/administration');
 });
 
 module.exports = router;
