@@ -18,7 +18,8 @@ function isLoggedIn(req, res, next) {
 // middleware de vérification de l'authentification et de l'administration
 function isLoggedInAndAdmin(req, res, next) {
   // l'utilisateur est connecté et administrateur, on continue
-	if(req.isAuthenticated() && req.user.admin == 'T')
+
+	if(req.isAuthenticated() && req.user.Admin == 'T')
 		return next();
 
 	// sinon on redirige vers l'accueil
@@ -127,6 +128,8 @@ router.get('/administration', isLoggedInAndAdmin, function(req, res, next) {
 	function aff(err, utilisateurs, videos, favoris) {
 		if(err)
 			res.redirect('/');
+
+		console.log(utilisateurs, videos, favoris);
 
 		res.render('administration/administration', {title : 'Interface d\'administration', videos : videos, utilisateurs : utilisateurs, favoris : favoris, user : req.user});
 	}
