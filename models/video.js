@@ -134,6 +134,15 @@ module.exports =
     connection.query("DELETE FROM ABONEMENT WHERE NomEmission = ? AND Login= (SELECT Login FROM UTILISATEUR WHERE Login= ? AND Mdp= ?)", [NomEmission, Login, Mdp], function(err, rows){});
   },
 
+  search: function(callback, txt)
+  {
+    var tmp= "%"+txt+"%";
+    connection.query("SELECT * FROM VIDEO WHERE NomEmission LIKE ? OR Description LIKE ?",[tmp, tmp], function(err, rows){
+      console.log(txt);
+      callback(err, rows);
+    });
+  },
+
   // insère un abonnement pour l'utilisateur Login
   setAbonnement: function(Login, Mdp, NomEmission)
   {

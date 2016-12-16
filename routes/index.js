@@ -32,6 +32,14 @@ router.get('/inscription', function(req, res) {
     res.render('inscription');
 });
 
+router.post('/search', function(req, res) {
+	function aff(err, result){
+		console.log(result);
+		res.render('search', {res: result, user: req.user, research: req.body.research});
+	}
+	video.search(aff, req.body.research);
+});
+
 /* POST formulaire d'inscription - appel de la stratégie 'local-signup' pour l'inscription
   se trouvant dans /config/passport.js
 */
