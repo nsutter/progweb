@@ -39,6 +39,22 @@ module.exports =
     });
   },
 
+  // modification de soi même
+  update(arg, id)
+  {
+    if(arg.Newsletter) // on formate correctement la newsletter et l'admin
+    {
+      var newsletter = 'T';
+    }
+    else
+    {
+      var newsletter = 'F';
+    }
+
+    connection.query("UPDATE UTILISATEUR SET Nom = ?, Prenom = ?, DateNaissance = ?, Email = ?, Newsletter = ?, Nationnalite = ? WHERE Login = ?", [arg.Nom, arg.Prenom, arg.DateNaissance, arg.Email, newsletter, arg.Nationnalite, id], function(err){
+    });
+  },
+
   // supprime un utilisateur en fonction de son Login
   deleteOneById(Login)
   {

@@ -2,35 +2,39 @@ extends layout
 
 block content
 
-  a(href='/')
-    .center
-      h1= title
-
   .container
     .row
-      .col-md-4
-      .col-md-4
-        .well
-          .center
-            | Nom: #{user.Nom}
-            br
-            br
-            | Prenom: #{user.Prenom}
-            br
-            br
-            | Login: #{user.Login}
-            br
-            br
-            | Email: #{user.Email}
-            br
-            br
-            | Date naissance: #{user.DateNaissance}
-            br
-            br
-            | Nationalité: #{user.Nationnalite}
-            br
-            br
-            if user.Newsletter == "T"
-              | Newsletter: Oui
-            else
-              | Newsletter: Non
+      .col-md-2
+      .col-md-8
+        .center
+          h1= title
+          .well
+            form(role='form', action='/profil', method='post', enctype='plain')
+              .form-group
+                p #{user.Login}
+              .form-group
+                label.gris(for='Nom') Nom
+                input.form-control(type='text', name='Nom', value=user.Nom, required='required')
+              .form-group
+                label.gris(for='Prenom') Prenom
+                input.form-control(type='text', name='Prenom', value=user.Prenom, required='required')
+              .form-group
+                label.gris(for='DateNaissance') DateNaissance
+                input.form-control(type='text', name='DateNaissance', value=user.DateNaissance, required='required')
+              .form-group
+                label.gris(for='Email') Email
+                input.form-control(type='text', name='Email', value=user.Email, required='required')
+              .form-group
+                label.gris(for='Newsletter') Newsletter
+                label.switch
+                  if user.Newsletter == "F"
+                    input(type='checkbox', name="Newsletter")
+                    .slider.round
+                  else
+                      input(type='checkbox', name="Newsletter", checked= "")
+                      .slider.round
+              .form-group
+                label.gris(for='Nationalite') Nationalite
+                input.form-control(type='text', name='Nationalite', value=user.Nationnalite)
+
+              button.btn.btn-large.btn-success(type='submit') Modifier !

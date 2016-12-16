@@ -71,6 +71,12 @@ router.get('/profil', isLoggedIn, function(req, res, next) {
   res.render('profil', {title : 'Profil de ' + req.user.Prenom + ' ' + req.user.Nom, user : req.user});
 });
 
+/* POST modification de son profil */
+router.post('/profil', isLoggedIn, function(req, res, next) {
+	utilisateur.update_noadmin(req.body, req.user.Login);
+	res.redirect('/profil');
+});
+
 /* GET page d'affichage d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
 	if(req.user) // si on est connecté
