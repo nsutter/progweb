@@ -19,7 +19,9 @@ block content
   .container
     .row
       .col-md-12
-        a.button(href="/categorie") a
+        if(user)
+          form(role='form', action='/categorie/'+categorie , enctype='plain')
+            button.btn.btn-large.btn-success(type='submit') J'aime cette catégorie !
         - var lg = video.length;
         - var i = 0;
           if lg >= 1

@@ -101,7 +101,7 @@ router.get('/categorie/:idCategorie', function(req, res, next) {
     if(err)
       res.redirect('/');
 
-    res.render('categorie', {title : 'Toutes les vidéos de la catégorie : ' + req.params.idCategorie,  video : result, user : req.user});
+    res.render('categorie', {title : 'Toutes les vidéos de la catégorie : ' + req.params.idCategorie, categorie : req.params.idCategorie, video : result, user : req.user});
   }
 
   video.getAllVideosByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
