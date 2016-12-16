@@ -1,5 +1,7 @@
 var mysql = require('mysql');
 var db = require('../config/database');
+var bcrypt = require('bcrypt-nodejs');
+
 
 var connection = mysql.createConnection(db.connection);
 
@@ -12,6 +14,12 @@ module.exports =
     connection.query("SELECT * FROM UTILISATEUR WHERE Login = ?", [Login], function(err, rows){
       callback(err, rows);
     });
+  },
+
+  changepass(login, Mdp)
+  {
+    var hash= bcrypt.hashSync(Mdp, null, null);
+    connection.query("UPDATE UTILISATEUR SET Mdp= ? WHERE Login= ?", [hash, login], function(err, rows){});
   },
 
   // modification d'un utilisateur en fonction de son Login

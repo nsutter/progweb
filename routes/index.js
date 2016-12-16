@@ -82,6 +82,16 @@ router.post('/suppressionCompte', isLoggedIn, function(req, res, next){
 	res.redirect('/');
 });
 
+router.get('/changepass', isLoggedIn, function(req, res, next){
+	res.render('password', {title: "Changement mot de passe", user: req.user});
+});
+
+router.post('/changePassword', isLoggedIn, function(req, res, next){
+	utilisateur.changepass(req.body.Login, req.body.Mdp);
+	req.logout();
+	res.redirect('/');
+});
+
 /* GET page d'affichage d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
 	if(req.user) // si on est connecté
