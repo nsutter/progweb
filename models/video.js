@@ -42,6 +42,11 @@ module.exports =
     });
   },
 
+  addHistorique: function(id, login)
+  {
+    connection.query("INSERT INTO HISTORIQUE (IdVideo, DateVisionnage, Login) VALUES (?, CURDATE(), ?)", [id, login], function(err, rows){})
+  },
+
   // récupère la vidéo d'identifiant id
   getOneById(callback, usr, id)
   {
