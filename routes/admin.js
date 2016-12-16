@@ -29,4 +29,13 @@ router.get('/', isLoggedInAndAdmin, function(req, res, next) {
 	administration.getAll(aff);
 });
 
+/* GET page d'affichage d'une vidéo */
+router.get('/:idVideo', function(req, res, next) {
+	function aff(err, result) {
+		res.render('video', {title : 'Modification de ' + result[0].NomEmission,  video : result, user : req.user});
+	}
+
+	video.getOneById_notco(aff, req.params.idVideo);
+});
+
 module.exports = router;
