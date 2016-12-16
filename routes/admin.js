@@ -50,8 +50,8 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
-router.post('/deleteFavori/:Login/:DdVideo', function(res, res, next) {
-	video.deleteFavori(aff, req.params.Login, req.params.IdVideo);
+router.post('/deleteFavori/:Login/:IdVideo', function(req, res, next) {
+	video.deleteFavori(req.params.Login, req.params.IdVideo);
 	res.redirect('/');
 });
 
