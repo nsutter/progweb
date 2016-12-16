@@ -14,12 +14,26 @@ block content
         br
         if user
           if estFavori.length == 0
-            a.btn.btn-primary.favoris(role='button')
+            a.btn.btn-primary.fav1.favoris(role='button')
               | Mettre en favoris&nbsp;
+            a.btn.btn-warning.fav2.favoris-rm(role='button')
+              | Favoris&nbsp;
+          else
+            a.btn.btn-primary.fav2.favoris(role='button')
+              | Mettre en favoris&nbsp;
+            a.btn.btn-warning.fav1.favoris-rm(role='button')
+              | Favoris&nbsp;
           | &nbsp;
           if estAbonne.length == 0
-            a.btn.btn-danger.abonnee(role='button')
+            a.btn.btn-danger.abo1.abonnee(role='button')
               | S'abonner&nbsp;
+            a.btn.btn-secondary.abo2.abonnee-rm(role='button')
+              | Se desabonner&nbsp;
+          else
+            a.btn.btn-danger.abo2.abonnee(role='button')
+              | S'abonner&nbsp;
+            a.btn.btn-secondary.abo1.abonnee-rm(role='button')
+              | Se desabonner&nbsp;
         | &nbsp;Episode #{video[0].NumEpisode}
         | Categorie #{video[0].Categorie}
         br
@@ -37,16 +51,30 @@ block content
       var socket = io.connect('http://localhost:3001');
 
       socket.on('rm-fav', function(data) {
-        $('.favoris').remove();
-        socket.close();
+        $(".fav2").show();
+        $(".fav1").hide();
       });
       socket.on('rm-abo', function(data) {
-        $('.abonnee').remove();
-        socket.close();
+        $(".abo2").show();
+        $(".abo1").hide();
+      });
+      socket.on('rm-favrm', function(data) {
+        $(".fav1").show();
+        $(".fav2").hide();
+      });
+      socket.on('rm-aborm', function(data) {
+        $(".abo1").show();
+        $(".abo2").hide();
       });
       $('.favoris').click(function() {
         socket.emit('favoris', '#{video[0].IdVideo}', '#{user.Mdp}', '#{user.Login}');
       });
       $('.abonnee').click(function() {
         socket.emit('abonnee', '#{video[0].NomEmission}', '#{user.Mdp}', '#{user.Login}');
+      });
+      $('.favoris-rm').click(function() {
+        socket.emit('favoris-rm', '#{video[0].IdVideo}', '#{user.Mdp}', '#{user.Login}');
+      });
+      $('.abonnee-rm').click(function() {
+        socket.emit('abonnee-rm', '#{video[0].NomEmission}', '#{user.Mdp}', '#{user.Login}');
       });

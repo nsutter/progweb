@@ -124,6 +124,16 @@ module.exports =
     connection.query("DELETE FROM FAVORIS WHERE Login = ? AND IdVideo = ?", [Login, IdVideo], function(err, rows){});
   },
 
+  delFav: function(Login, IdVideo, Mdp)
+  {
+    connection.query("DELETE FROM FAVORIS WHERE IdVideo = ? AND Login= (SELECT Login FROM UTILISATEUR WHERE Login= ? AND Mdp= ?)", [IdVideo, Login, Mdp], function(err, rows){});
+  },
+
+  delAbonement: function(Login, NomEmission, Mdp)
+  {
+    connection.query("DELETE FROM ABONEMENT WHERE NomEmission = ? AND Login= (SELECT Login FROM UTILISATEUR WHERE Login= ? AND Mdp= ?)", [NomEmission, Login, Mdp], function(err, rows){});
+  },
+
   // insère un abonnement pour l'utilisateur Login
   setAbonnement: function(Login, Mdp, NomEmission)
   {

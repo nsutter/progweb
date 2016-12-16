@@ -11,6 +11,29 @@ body {
   min-height: 70%;
 }
 
+#fav {
+  display: inline;
+}
+#abo {
+  display: inline;
+}
+
+.fav2{
+  display: none;
+}
+
+.abo2{
+ display: none;
+}
+
+.abo1{
+  display: inline;
+}
+
+.fav1{
+  display: inline;
+}
+
 .embed-container iframe, .embed-container object, .embed-container embed {
   position: absolute;
   top: 0;
