@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+
+  .container
+    .row
+      .col-md-2
+      .col-md-8
+        .center
+          h1= title
+          .well
+            form(role='form', action='/administration/nouvelleVideo', method='post', enctype='plain')
+              .form-group
+                label.gris(for='NomEmission') NomEmission
+                input.form-control(type='text', name='NomEmission', required='required')
+              .form-group
+                label.gris(for='NumEpisode') NumEpisode
+                input.form-control(type='text', name='NumEpisode', required='required')
+              .form-group
+                label.gris(for='Description') Description
+                input.form-control(type='text', name='Description', required='required')
+              .form-group
+                label.gris(for='Categorie') Categorie
+                input.form-control(type='text', name='Categorie', required='required')
+              .form-group
+                label.gris(for='Multilangue') Multilangue
+                label.switch
+                    input(type='checkbox', name="Multilangue")
+                    .slider.round
+              .form-group
+                label.gris(for='FormatImage') FormatImage
+                input.form-control(type='text', name='FormatImage')
+              .form-group
+                label.gris(for='Duree') Duree
+                input.form-control(type='text', name='Duree')
+              .form-group
+                label.gris(for='DateFinDroit') Date fin droit
+                input.form-control(type='date', name="DateFinDroit", placeholder='Date fin de droit - (YYYY-MM-DD)')
+              .form-group
+                label.gris(for='DateFinDiff') Date fin diffusion
+                input.form-control(type='date', name="DateFinDiff", placeholder='Date fin de diffusion - (YYYY-MM-DD)')
+              .form-group
+                label.gris(for='Pays') Pays
+                input.form-control(type='text', name='Pays')
+                  
+              button.btn.btn-large.btn-success(type='submit') Ajouter !
