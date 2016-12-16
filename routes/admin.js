@@ -28,7 +28,7 @@ router.get('/', isLoggedInAndAdmin, function(req, res, next) {
 });
 
 /* GET page d'affichage de la modification d'une vidéo */
-router.get('/video/:idVideo', function(req, res, next) {
+router.get('/video/:idVideo', isLoggedInAndAdmin, function(req, res, next) {
 	function aff(err, result) {
 		res.render('administration/video', {title : 'Modification de la vidéo ' + result[0].NomEmission,  video : result, user : req.user});
 	}
@@ -36,8 +36,13 @@ router.get('/video/:idVideo', function(req, res, next) {
 	video.getOneById_notco(aff, req.params.idVideo);
 });
 
+router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
+	video.deleteOneById(req.params.idVideo);
+	res.redirect('/');
+})
+
 /* GET page d'affichage de la modification d'une utilisateur */
-router.get('/utilisateur/:idUtilisateur', function(req, res, next) {
+router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res, next) {
 	function aff(err, result) {
 		res.render('administration/utilisateur', {title : 'Modification de l\'utilisateur ' + result[0].Login,  utilisateur : result, user : req.user});
 	}

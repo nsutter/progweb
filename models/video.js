@@ -58,9 +58,14 @@ module.exports =
 
   getOneById_notco(callback, id)
   {
-    connection.query("SELECT * FROM VIDEO WHERE idVideo = ?", [id], function(err, rows){
+    connection.query("SELECT * FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){
       callback(err, rows); // vidéo résultat, favori, abonnement
     });
+  },
+
+  deleteOneById(id)
+  {
+    connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
   },
 
   // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
