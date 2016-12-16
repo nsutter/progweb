@@ -69,6 +69,10 @@ a {
   transform: translate(-50%, -50%);
 }
 
+.img-responsive {
+  margin: auto;
+}
+
 .center {
   text-align: center;
   align: center;
