@@ -47,6 +47,6 @@ block content
                     while ifavoris < lgfavoris
                       li
                         | #{favoris[ifavoris].Login} aime la vidéo #{favoris[ifavoris].IdVideo}
-                        form(role='form', action='/admin/deleteFavori/' + favoris[ifavoris].Login + "/" + favoris[ifavoris].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer ce de favori ?');")
+                        form(role='form', action='/administration/deleteFavori/' + favoris[ifavoris].Login + "/" + favoris[ifavoris].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer ce favori ?');")
                           button.btn.btn-large.btn-danger(type='submit') Supprimer le favori !
                       - ifavoris = ifavoris + 1

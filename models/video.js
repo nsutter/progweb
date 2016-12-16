@@ -63,6 +63,7 @@ module.exports =
     });
   },
 
+  // supprime une vidéo en fonction d'IdVideo
   deleteOneById(id)
   {
     connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
@@ -97,10 +98,10 @@ module.exports =
     });
   },
 
-
+  // supprime un favori en fonction du Login et d'IdVideo
   deleteFavori: function(Login, IdVideo)
   {
-    
+    connection.query("DELETE FROM FAVORIS WHERE Login = ? AND IdVideo = ?", [Login, IdVideo], function(err, rows){});
   },
 
   // insère un abonnement pour l'utilisateur Login
