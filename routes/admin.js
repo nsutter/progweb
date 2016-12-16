@@ -50,4 +50,8 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
+router.post('/suppression/favori/:idFavori', function(res, res, next) {
+	
+});
+
 module.exports = router;
