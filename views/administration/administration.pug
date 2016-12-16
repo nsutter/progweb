@@ -26,7 +26,25 @@ block content
                       li
                         a(href="/administration/video/"+videos[ivideos].IdVideo) #{videos[ivideos].NomEmission}
                       - ivideos = ivideos + 1
-
-          #tabUtilisateurs.tab-pane.fade
-
-          #tabFavoris.tab-pane.fade
+              #tabUtilisateurs.tab-pane.fade
+                - var lgutilisateurs = utilisateurs.length;
+                - var iutilisateurs = 0;
+                  if lgutilisateurs == 0
+                    p Aucune vidéo :/
+                  else
+                    ul
+                    while iutilisateurs < lgutilisateurs
+                      li
+                        a(href="/administration/utilisateur/"+utilisateurs[iutilisateurs].Login) #{utilisateurs[iutilisateurs].Login}
+                      - iutilisateurs = iutilisateurs + 1
+              #tabFavoris.tab-pane.fade
+                - var lgfavoris = favoris.length;
+                - var ifavoris = 0;
+                  if lgfavoris == 0
+                    p Aucune vidéo :/
+                  else
+                    ul
+                    while ifavoris < lgfavoris
+                      li
+                        a(href="/administration/favori/" + favoris[ifavoris].Login + "+" + favoris[ifavoris].IdVideo) #{favoris[ifavoris].Login} aime la vidéo #{favoris[ifavoris].IdVideo}
+                      - ifavoris = ifavoris + 1

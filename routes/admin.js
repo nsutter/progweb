@@ -21,21 +21,28 @@ router.get('/', isLoggedInAndAdmin, function(req, res, next) {
 		if(err)
 			res.redirect('/');
 
-		console.log(utilisateurs, videos, favoris);
-
 		res.render('administration/administration', {title : 'Interface d\'administration', videos : videos, utilisateurs : utilisateurs, favoris : favoris, user : req.user});
 	}
 
 	administration.getAll(aff);
 });
 
-/* GET page d'affichage d'une vidéo */
+/* GET page d'affichage de la modification d'une vidéo */
 router.get('/video/:idVideo', function(req, res, next) {
 	function aff(err, result) {
-		res.render('administration/video', {title : 'Modification de ' + result[0].NomEmission,  video : result, user : req.user});
+		res.render('administration/video', {title : 'Modification de la vidéo ' + result[0].NomEmission,  video : result, user : req.user});
 	}
 
 	video.getOneById_notco(aff, req.params.idVideo);
+});
+
+/* GET page d'affichage de la modification d'une utilisateur */
+router.get('/utilisateur/:idUtilisateur', function(req, res, next) {
+	function aff(err, result) {
+		res.render('administration/utilisateur', {title : 'Modification de l\'utilisateur ' + result[0].Login,  utilisateur : result, user : req.user});
+	}
+
+	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
 module.exports = router;
