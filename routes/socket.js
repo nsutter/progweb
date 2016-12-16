@@ -19,6 +19,14 @@ module.exports = function(passport){
 			video.setAbonnement(log, Mdp, vid);
       socket.emit('rm-abo');
     });
+		socket.on('abonnee-rm', function(vid, Mdp, log) {
+			video.delAbonement(log, vid, Mdp);
+      socket.emit('rm-aborm');
+    });
+		socket.on('favoris-rm', function(vid, Mdp, log) {
+			video.delFav(log, vid, Mdp);
+      socket.emit('rm-favrm');
+    });
 
 	});
 	server.listen(3001);

@@ -56,7 +56,14 @@ app.use(function(err, req, res, next) {
 
   // rendu de la page d'erreur
   res.status(err.status || 500);
-  res.render('error');
+	if(err.status == 404)
+  {
+    res.render('404');
+  }
+	else
+	{	
+		res.render('error');
+	}
 });
 
 module.exports = app;
