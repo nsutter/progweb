@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+
+    .container
+      .row
+        .col-md-12
+          .well
+            ul.nav.nav-pills
+              li.active
+                a(data-toggle='pill', href='#tabVideos') Vidéos
+              li
+                a(data-toggle='pill', href='#tabUtilisateurs') Utilisateurs
+              li
+                a(data-toggle='pill', href='#tabFavoris') Favoris
+            br
+            .tab-content
+              #tabVideos.tab-pane.fade.in.active
+                - var lgvideos = videos.length;
+                - var ivideos = 0;
+                  if lgvideos == 0
+                    p Aucune vidéo :/
+                  else
+                    ul
+                    while ivideos < lgvideos
+                      li
+                        a(href="#{videos[ivideos]}.IdVideo") #{videos[ivideos].NomEmission}
+                      - ivideos = ivideos + 1
+
+          #tabUtilisateurs.tab-pane.fade
+
+          #tabFavoris.tab-pane.fade
