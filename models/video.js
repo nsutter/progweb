@@ -97,10 +97,15 @@ module.exports =
     });
   },
 
+
+  deleteFavori: function(Login, IdVideo)
+  {
+    
+  },
+
   // insère un abonnement pour l'utilisateur Login
   setAbonnement: function(Login, Mdp, NomEmission)
   {
-    console.log(Login);
     connection.query("SELECT * FROM UTILISATEUR WHERE Login = ? AND Mdp = ?", [Login, Mdp], function(err, rows){
       if(rows.length == 1)
       {

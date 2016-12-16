@@ -46,5 +46,7 @@ block content
                     ul
                     while ifavoris < lgfavoris
                       li
-                        a(href="/administration/favori/" + favoris[ifavoris].Login + "+" + favoris[ifavoris].IdVideo) #{favoris[ifavoris].Login} aime la vidéo #{favoris[ifavoris].IdVideo}
+                        | #{favoris[ifavoris].Login} aime la vidéo #{favoris[ifavoris].IdVideo}
+                        form(role='form', action='/admin/deleteFavori/' + favoris[ifavoris].Login + "/" + favoris[ifavoris].IdVideo, method='post', enctype='plain', onsubmit="return confirm('Voulez vous vraiment supprimer ce de favori ?');")
+                          button.btn.btn-large.btn-danger(type='submit') Supprimer le favori !
                       - ifavoris = ifavoris + 1

@@ -50,8 +50,9 @@ router.get('/utilisateur/:idUtilisateur', isLoggedInAndAdmin, function(req, res,
 	utilisateur.getOneById(aff, req.params.idUtilisateur);
 });
 
-router.post('/suppression/favori/:idFavori', function(res, res, next) {
-	
+router.post('/deleteFavori/:Login/:DdVideo', function(res, res, next) {
+	video.deleteFavori(aff, req.params.Login, req.params.IdVideo);
+	res.redirect('/');
 });
 
 module.exports = router;
