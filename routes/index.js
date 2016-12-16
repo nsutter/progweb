@@ -79,6 +79,7 @@ router.post('/profil', isLoggedIn, function(req, res, next) {
 
 router.post('/suppressionCompte', isLoggedIn, function(req, res, next){
 	utilisateur.deleteOneById(req.user.Login);
+	req.logout();
 	res.redirect('/');
 });
 
