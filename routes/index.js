@@ -107,8 +107,9 @@ router.get('/categorie/:idCategorie', function(req, res, next) {
   video.getAllVideosByCategory(aff, req.params.idCategorie); // on récupère les vidéos - partie "modèle"
 });
 
-/* POST like d'une catégorie par un utilisateur */
-router.post('/categorie/:idCategorie', function(req, res, next) {
+/* GET like d'une catégorie par un utilisateur */
+router.get('/categorieu/:idCategorie', isLoggedIn, function(req, res, next) {
+	console.log(req.user.Login + " ( ) " + req.params.idCategorie);
   video.addCategory(req.user.Login, req.params.idCategorie);
 	res.redirect('/');
 });

@@ -189,6 +189,6 @@ module.exports =
   // insère une catégorie appréciée par un utilisateur
   addCategory: function(login, category)
   {
-    connection.query("INSERT INTO CATEGORIEU VALUES (?,?)", [category, login], function(err, rows){});
+    connection.query("INSERT INTO CATEGORIEU VALUES (?,?)", [login, category], function(err, rows){});
   }
 }
