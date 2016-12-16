@@ -36,6 +36,11 @@ router.get('/video/:idVideo', isLoggedInAndAdmin, function(req, res, next) {
 	video.getOneById_notco(aff, req.params.idVideo);
 });
 
+router.post('/video/:IdVideo', isLoggedInAndAdmin, function(req, res, next){
+	video.update(req.body, req.params.IdVideo);
+	res.redirect('/');
+})
+
 router.post('/deleteVideo/:idVideo', isLoggedInAndAdmin, function(req, res, next){
 	video.deleteOneById(req.params.idVideo);
 	res.redirect('/');

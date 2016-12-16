@@ -11,10 +11,10 @@ block content
           .embed-container
             iframe(src='https://www.youtube.com/embed/'+video[0].IdVideo, allowfullscreen='')
           .well
+            | IdVideo : #{video[0].IdVideo}
+            br
+            br
             form(role='form', action='/administration/video/'+video[0].IdVideo, method='post', enctype='plain')
-              .form-group
-                label.gris(for='IdVideo') IdVideo
-                input.form-control(type='text', name='IdVideo', value=video[0].IdVideo, required='required')
               .form-group
                 label.gris(for='NomEmission') NomEmission
                 input.form-control(type='text', name='NomEmission', value=video[0].NomEmission, required='required')
@@ -27,9 +27,6 @@ block content
               .form-group
                 label.gris(for='Categorie') Categorie
                 input.form-control(type='text', name='Categorie', value=video[0].Categorie, required='required')
-              .form-group
-                label.gris(for='NomEmission') NomEmission
-                input.form-control(type='text', name='NomEmission', value=video[0].NomEmission, required='required')
               .form-group
                 label.gris(for='Multilangue') Multilangue
                 label.switch

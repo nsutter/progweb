@@ -69,6 +69,21 @@ module.exports =
     connection.query("DELETE FROM VIDEO WHERE IdVideo = ?", [id], function(err, rows){});
   },
 
+  update(arg, id)
+  {
+    if(arg.Multilangue)
+    {
+      var multilangue = 'T';
+    }
+    else
+    {
+      var multilangue = 'F';
+    }
+    connection.query("UPDATE VIDEO SET IdVideo = ?, NomEmission = ?, NumEpisode = ?, Description = ?, Categorie = ?, MultiLangue = ?, FormatImage = ?, Duree = ?, DateFinDroit = ?, DateFinDiff = ?, Pays = ? WHERE IdVideo = ?", [arg.IdVideo, arg.NomEmission, arg.NumEpisode, arg.Description, arg.Categorie, multilangue, arg.FormatImage, arg.Duree, arg.DateFinDroit, arg.DateFinDiff, arg.Pays, id], function(err){
+      console.log(err);
+    });
+  },
+
   // récupère les vidéos diffusées il y a - de 2 semaines des émissions auxquelles l'utilisateur est abonné
   getNouveautes: function(callback, login)
   {
